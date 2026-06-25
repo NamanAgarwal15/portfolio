@@ -144,12 +144,14 @@ export default function Stats() {
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-10">
         {[
           { label: "Views", value: data.totals.views },
           { label: "Sessions", value: data.totals.sessions },
           { label: "Messages", value: data.totals.messages },
           { label: "Guestbook", value: data.totals.guestbook },
+          { label: "Chats", value: data.totals.chats },
+          { label: "Chat Sessions", value: data.totals.chatSessions },
         ].map((kpi) => (
           <div key={kpi.label} className="border border-[#1A1A1A]/15 p-5">
             <div className="text-[10px] uppercase tracking-widest font-light text-[#475569]">{kpi.label}</div>
@@ -157,6 +159,7 @@ export default function Stats() {
           </div>
         ))}
       </div>
+
 
       {/* Daily chart */}
       <div className="mt-10 border border-[#1A1A1A]/15 p-5">
