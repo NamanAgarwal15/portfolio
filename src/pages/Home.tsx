@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Counter from "@/components/Counter";
 import SEO from "@/components/SEO";
+import ReactionGame from "@/components/ReactionGame";
 
 const name = "Naman Agarwal";
 
@@ -90,6 +91,15 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: name.length * 0.03 + 0.9, duration: 0.5 }}
+        className="mt-16 max-w-md"
+      >
+        <ReactionGame />
       </motion.div>
     </section>
   );

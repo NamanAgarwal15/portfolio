@@ -44,7 +44,11 @@ function AnimatedRoutes() {
 
 export default function App() {
   useEffect(() => {
-    const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    const lenis = new Lenis({
+      duration: 1.1,
+      smoothWheel: true,
+      prevent: (node: Element) => !!(node as HTMLElement).closest?.("[data-lenis-prevent]"),
+    } as ConstructorParameters<typeof Lenis>[0]);
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
