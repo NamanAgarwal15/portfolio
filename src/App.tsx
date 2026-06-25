@@ -8,12 +8,14 @@ import Cursor from "./components/Cursor";
 import ScrollProgress from "./components/ScrollProgress";
 import AskNaman from "./components/AskNaman";
 import KonamiEgg from "./components/KonamiEgg";
+import Companion from "./components/Companion";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Work from "./pages/Work";
 import Contact from "./pages/Contact";
 import Guestbook from "./pages/Guestbook";
 import Stats from "./pages/Stats";
+import Arcade from "./pages/Arcade";
 import { Toaster } from "@/components/ui/sonner";
 import { useAnalytics } from "@/hooks/useAnalytics";
 
@@ -36,6 +38,7 @@ function AnimatedRoutes() {
           <Route path="/guestbook" element={<Guestbook />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/arcade" element={<Arcade />} />
         </Routes>
       </motion.div>
     </AnimatePresence>
@@ -70,6 +73,7 @@ export default function App() {
         <AnimatedRoutes />
       </main>
       <Footer />
+      <Companion />
       <AskNaman />
       <Toaster />
     </HashRouter>

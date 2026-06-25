@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Counter from "@/components/Counter";
 import SEO from "@/components/SEO";
-import ReactionGame from "@/components/ReactionGame";
+import Brainteaser from "@/components/Brainteaser";
 
 const name = "Naman Agarwal";
 
@@ -97,9 +97,12 @@ export default function Home() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: name.length * 0.03 + 0.9, duration: 0.5 }}
-        className="mt-16 max-w-md"
+        className="mt-16 max-w-2xl"
       >
-        <ReactionGame />
+        <Brainteaser />
+        <p className="mt-3 text-[10px] uppercase tracking-widest text-[#475569] font-light">
+          50 brainteasers · auto-rotates every 12s · or hit next
+        </p>
       </motion.div>
     </section>
   );

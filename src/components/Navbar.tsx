@@ -7,6 +7,7 @@ const links = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/work", label: "Work" },
+  { to: "/arcade", label: "Arcade", blink: true },
   { to: "/guestbook", label: "Guestbook" },
   { to: "/contact", label: "Contact" },
 ];
@@ -27,8 +28,9 @@ export default function Navbar() {
               <NavLink
                 to={l.to}
                 end={l.to === "/"}
-                className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+                className={({ isActive }) => `nav-link ${isActive ? "active" : ""} ${l.blink ? "blink-link" : ""}`}
               >
+                {l.blink && <span className="blink-dot" aria-hidden />}
                 {l.label}
               </NavLink>
             </li>
@@ -70,8 +72,9 @@ export default function Navbar() {
                     to={l.to}
                     end={l.to === "/"}
                     onClick={() => setOpen(false)}
-                    className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
+                    className={({ isActive }) => `nav-link ${isActive ? "active" : ""} ${l.blink ? "blink-link" : ""}`}
                   >
+                    {l.blink && <span className="blink-dot" aria-hidden />}
                     {l.label}
                   </NavLink>
                 </motion.li>
