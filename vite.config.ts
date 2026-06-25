@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 
 export default defineConfig({
-  base: "/naman-animated-folio/",
+  base: '/naman-s-animated-portfolio-54/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
