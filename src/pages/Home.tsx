@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Counter from "@/components/Counter";
 import SEO from "@/components/SEO";
+import ReactionGame from "@/components/ReactionGame";
 
 const name = "Naman Agarwal";
 
