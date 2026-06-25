@@ -4,6 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import { z } from "zod";
 import { Reveal } from "@/components/Section";
 import { toast } from "sonner";
+import SEO from "@/components/SEO";
+import { supabase } from "@/integrations/supabase/client";
 
 const rows = [
   { label: "Email", value: "naman.agarwal.23cse@bmu.edu.in", href: "mailto:naman.agarwal.23cse@bmu.edu.in" },
