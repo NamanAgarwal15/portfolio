@@ -60,6 +60,20 @@ export default function Guestbook() {
 
   async function post(e: React.FormEvent) {
     e.preventDefault();
+    // Honeypot: bots fill hidden fields
+    if (hp) return;
+    // Time trap: submissions under 2s are almost certainly bots
+    if (Date.now() - mountedAt < 2000) {
+      toast.error("Whoa, slow down.");
+      return;
+    }
+    // Math CAPTCHA
+    if (Number(captchaInput) !== captcha.answer) {
+      toast.error("Captcha incorrect — try again.");
+      setCaptcha(makeCaptcha());
+      setCaptchaInput("");
+      return;
+    }
     const last = Number(localStorage.getItem(RL_KEY) || 0);
     if (Date.now() - last < RL_MS) {
       toast.error("Slow down — wait a minute between notes.");
@@ -81,10 +95,14 @@ export default function Guestbook() {
     setPosting(false);
     if (error) {
       toast.error("Couldn't post — try again");
+      setCaptcha(makeCaptcha());
+      setCaptchaInput("");
       return;
     }
     localStorage.setItem(RL_KEY, String(Date.now()));
     setForm({ display_name: "", email: "", message: "" });
+    setCaptcha(makeCaptcha());
+    setCaptchaInput("");
     toast.success("Signed!");
     load();
   }
