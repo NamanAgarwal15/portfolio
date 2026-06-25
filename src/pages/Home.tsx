@@ -92,6 +92,15 @@ export default function Home() {
           ))}
         </div>
       </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: name.length * 0.03 + 0.9, duration: 0.5 }}
+        className="mt-16 max-w-md"
+      >
+        <ReactionGame />
+      </motion.div>
     </section>
   );
 }
