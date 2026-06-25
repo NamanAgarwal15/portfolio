@@ -162,6 +162,48 @@ export default function Guestbook() {
             />
           </div>
 
+          {/* Honeypot — hidden from humans, catnip for bots */}
+          <div aria-hidden="true" className="absolute -left-[9999px] opacity-0 pointer-events-none">
+            <label>
+              Website
+              <input
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={hp}
+                onChange={(e) => setHp(e.target.value)}
+              />
+            </label>
+          </div>
+
+          {/* Math CAPTCHA */}
+          <div>
+            <label className="text-xs uppercase tracking-widest font-light text-[#475569]">
+              Quick check — what's {captcha.a} + {captcha.b}?
+            </label>
+            <div className="flex items-center gap-3">
+              <input
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                value={captchaInput}
+                onChange={(e) => setCaptchaInput(e.target.value)}
+                maxLength={3}
+                required
+                placeholder="Answer"
+                className="mt-1 w-32 bg-transparent border-b border-[#475569]/30 py-2 text-sm font-light focus:outline-none focus:border-[#1A1A1A]"
+              />
+              <button
+                type="button"
+                onClick={() => { setCaptcha(makeCaptcha()); setCaptchaInput(""); }}
+                className="mt-1 text-[10px] uppercase tracking-widest text-[#475569] hover:text-[#1A1A1A] transition-colors"
+              >
+                ↻ New
+              </button>
+            </div>
+          </div>
+
+
           <div className="flex items-center justify-between">
             <span className="text-xs font-light text-[#475569]">{form.message.length}/140</span>
             <button
