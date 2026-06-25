@@ -23,10 +23,20 @@ const schema = z.object({
 const RL_KEY = "gb_last_post_at";
 const RL_MS = 60_000;
 
+function makeCaptcha() {
+  const a = Math.floor(Math.random() * 9) + 1;
+  const b = Math.floor(Math.random() * 9) + 1;
+  return { a, b, answer: a + b };
+}
+
 export default function Guestbook() {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [form, setForm] = useState({ display_name: "", email: "", message: "" });
   const [posting, setPosting] = useState(false);
+  const [captcha, setCaptcha] = useState(makeCaptcha);
+  const [captchaInput, setCaptchaInput] = useState("");
+  const [hp, setHp] = useState(""); // honeypot
+  const [mountedAt] = useState(() => Date.now());
 
   async function load() {
     const { data, error } = await supabase
