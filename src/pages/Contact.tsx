@@ -23,14 +23,17 @@ export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const update = (k: keyof typeof form, v: string) => {
+    if (submitted || submitting) return;
     setForm((f) => ({ ...f, [k]: v }));
     if (errors[k]) setErrors((e) => ({ ...e, [k]: "" }));
   };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (submitted || submitting) return;
     const result = contactSchema.safeParse(form);
     if (!result.success) {
       const fieldErrors: Record<string, string> = {};
@@ -46,10 +49,16 @@ export default function Contact() {
     const mailto = `mailto:naman.agarwal.23cse@bmu.edu.in?subject=${encodeURIComponent(subject)}&body=${body}`;
     window.location.href = mailto;
     setTimeout(() => {
-      toast.success("Opening your email client…");
+      toast.success("Message sent!", {
+        description: "Your email client has been opened. Thanks for reaching out — I'll reply soon.",
+      });
+      setForm({ name: "", email: "", subject: "", message: "" });
+      setErrors({});
       setSubmitting(false);
+      setSubmitted(true);
     }, 400);
   };
+
 
   const inputClass =
     "w-full bg-transparent border-b border-[#475569]/30 py-3 text-base font-light text-[#1A1A1A] placeholder:text-[#475569]/60 focus:outline-none focus:border-[#1A1A1A] transition-colors";
