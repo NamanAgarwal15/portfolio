@@ -53,6 +53,13 @@ export default function Home() {
         >
           View My Work
         </Link>
+        <a
+          href={`${import.meta.env.BASE_URL}Naman_Agarwal.pdf`}
+          download="Naman_Agarwal.pdf"
+          className="nav-link text-sm font-light"
+        >
+          Download Resume
+        </a>
         <Link to="/contact" className="nav-link text-sm font-light">
           Get In Touch
         </Link>
