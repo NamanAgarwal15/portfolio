@@ -52,7 +52,7 @@ export default function AskNaman() {
           Authorization: `Bearer ${ANON}`,
           apikey: ANON,
         },
-        body: JSON.stringify({ messages: newMessages }),
+        body: JSON.stringify({ messages: newMessages, sessionId: sessionIdRef.current }),
       });
       if (!res.ok || !res.body) {
         const j = await res.json().catch(() => ({}));
