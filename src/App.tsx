@@ -35,6 +35,7 @@ function AnimatedRoutes() {
           <Route path="/work" element={<Work />} />
           <Route path="/guestbook" element={<Guestbook />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/stats" element={<Stats />} />
         </Routes>
       </motion.div>
     </AnimatePresence>
