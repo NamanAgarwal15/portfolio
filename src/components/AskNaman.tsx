@@ -133,7 +133,7 @@ export default function AskNaman() {
               </div>
             </div>
 
-            <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+            <div ref={scrollRef} data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 space-y-3">
               {messages.length === 0 && (
                 <div className="space-y-3">
                   <p className="text-sm font-light text-[#475569]">
