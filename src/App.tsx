@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Work from "./pages/Work";
 import Contact from "./pages/Contact";
+import { Toaster } from "@/components/ui/sonner";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -56,6 +57,7 @@ export default function App() {
         <AnimatedRoutes />
       </main>
       <Footer />
+      <Toaster />
     </HashRouter>
   );
 }
