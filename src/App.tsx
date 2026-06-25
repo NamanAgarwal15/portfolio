@@ -47,8 +47,8 @@ export default function App() {
     const lenis = new Lenis({
       duration: 1.1,
       smoothWheel: true,
-      prevent: (node) => !!(node as HTMLElement).closest?.("[data-lenis-prevent]"),
-    });
+      prevent: (node: Element) => !!(node as HTMLElement).closest?.("[data-lenis-prevent]"),
+    } as ConstructorParameters<typeof Lenis>[0]);
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
