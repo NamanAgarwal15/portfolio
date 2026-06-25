@@ -88,3 +88,20 @@ html.brutalist a, html.brutalist button {
 @media (prefers-reduced-motion: reduce) {
   .blink-dot { animation: none; }
 }
+
+/* Party mode — colorful, playful overlay */
+html.party body {
+  background:
+    radial-gradient(at 10% 10%, rgba(255,99,164,0.18), transparent 40%),
+    radial-gradient(at 90% 20%, rgba(255,209,102,0.22), transparent 45%),
+    radial-gradient(at 50% 90%, rgba(99,179,255,0.20), transparent 45%),
+    #FFF7EC !important;
+}
+html.party .party-card {
+  background: rgba(255,255,255,0.7) !important;
+  border-color: rgba(236,72,153,0.35) !important;
+  box-shadow: 6px 6px 0 0 rgba(236,72,153,0.18);
+}
+html.party .nav-link::after { background: #ec4899; }
+@keyframes party-wiggle { 0%,100% { transform: rotate(-0.4deg); } 50% { transform: rotate(0.4deg); } }
+html.party h1, html.party h2 { animation: party-wiggle 4s ease-in-out infinite; }
