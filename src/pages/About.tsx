@@ -1,0 +1,118 @@
+import { motion } from "framer-motion";
+import { Reveal } from "@/components/Section";
+
+const skills = {
+  Languages: ["Java", "Python"],
+  "Frameworks & Libraries": [
+    "NumPy",
+    "pandas",
+    "scikit-learn",
+    "Matplotlib",
+    "Seaborn",
+    "OpenCV",
+    "TensorFlow",
+  ],
+  Tools: ["MySQL", "Git", "JIRA", "VS Code", "Kaggle Notebooks", "Excel"],
+  Concepts: ["OOP", "DBMS", "Algorithms", "Agile Development"],
+};
+
+const education = [
+  {
+    title: "B.Tech CSE — Data Science & AI",
+    sub: "BML Munjal University · 2023–2027 · CGPA: 7.93",
+  },
+  { title: "12th CBSE, Rajasthan", sub: "86.8%" },
+  { title: "10th ICSE, West Bengal", sub: "84.66%" },
+];
+
+const achievements = [
+  "First Runner-Up, TechSparx.I Showcase (BMU) — 80+ teams",
+  "Co-Chair, Innovation Vertical, Young Indians BMU",
+  "Foundations of Project Management — Google, Coursera, May 2026",
+];
+
+export default function About() {
+  return (
+    <section className="max-w-4xl mx-auto px-6 py-20">
+      <Reveal>
+        <h2 className="text-3xl sm:text-4xl font-light tracking-tight">About</h2>
+      </Reveal>
+
+      <Reveal delay={0.05}>
+        <p className="mt-8 max-w-3xl text-base sm:text-lg font-light leading-relaxed text-[#1A1A1A]/85">
+          I'm a third-year CSE undergrad at BML Munjal University specialising in Data Science
+          and AI. I work at the intersection of machine learning, computer vision, and product
+          thinking — building systems that are deployable, not just experimental.
+        </p>
+      </Reveal>
+
+      <div className="mt-20">
+        <Reveal>
+          <h3 className="text-xs uppercase tracking-widest text-[#475569] font-medium">Skills</h3>
+        </Reveal>
+        <div className="mt-8 space-y-8">
+          {Object.entries(skills).map(([group, items]) => (
+            <Reveal key={group}>
+              <div className="text-xs uppercase tracking-widest text-[#475569]/80 font-light">
+                {group}
+              </div>
+              <motion.div
+                className="mt-3 flex flex-wrap gap-2"
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={{ show: { transition: { staggerChildren: 0.05 } } }}
+              >
+                {items.map((s) => (
+                  <motion.span
+                    key={s}
+                    variants={{
+                      hidden: { opacity: 0, y: 12 },
+                      show: { opacity: 1, y: 0 },
+                    }}
+                    className="border border-[#475569]/60 rounded-full px-4 py-1.5 text-sm font-light text-[#1A1A1A]"
+                  >
+                    {s}
+                  </motion.span>
+                ))}
+              </motion.div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-20">
+        <Reveal>
+          <h3 className="text-xs uppercase tracking-widest text-[#475569] font-medium">
+            Education
+          </h3>
+        </Reveal>
+        <ul className="mt-8 divide-y divide-[#475569]/15">
+          {education.map((e, i) => (
+            <Reveal key={i} delay={i * 0.05}>
+              <li className="py-5">
+                <div className="font-medium">{e.title}</div>
+                <div className="text-sm font-light text-[#475569] mt-1">{e.sub}</div>
+              </li>
+            </Reveal>
+          ))}
+        </ul>
+      </div>
+
+      <div className="mt-20">
+        <Reveal>
+          <h3 className="text-xs uppercase tracking-widest text-[#475569] font-medium">
+            Achievements
+          </h3>
+        </Reveal>
+        <ul className="mt-8 space-y-4">
+          {achievements.map((a, i) => (
+            <Reveal key={i} delay={i * 0.05}>
+              <li className="font-light leading-relaxed">— {a}</li>
+            </Reveal>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
