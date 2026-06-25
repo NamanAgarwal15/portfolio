@@ -14,8 +14,10 @@ import Work from "./pages/Work";
 import Contact from "./pages/Contact";
 import Guestbook from "./pages/Guestbook";
 import { Toaster } from "@/components/ui/sonner";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 function AnimatedRoutes() {
+  useAnalytics();
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
