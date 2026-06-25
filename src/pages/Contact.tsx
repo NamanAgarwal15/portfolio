@@ -150,12 +150,24 @@ export default function Contact() {
 
           <button
             type="submit"
-            disabled={submitting}
-            className="group inline-flex items-center gap-2 border border-[#1A1A1A] px-6 py-3 text-sm font-medium hover:bg-[#1A1A1A] hover:text-[#F7F5F2] transition-colors duration-300 disabled:opacity-50"
+            disabled={submitting || submitted}
+            className="group inline-flex items-center gap-2 border border-[#1A1A1A] px-6 py-3 text-sm font-medium hover:bg-[#1A1A1A] hover:text-[#F7F5F2] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-[#1A1A1A]"
           >
-            {submitting ? "Sending…" : "Send Message"}
-            <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            {submitted ? "Message Sent ✓" : submitting ? "Sending…" : "Send Message"}
+            {!submitted && (
+              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            )}
           </button>
+
+          {submitted && (
+            <button
+              type="button"
+              onClick={() => setSubmitted(false)}
+              className="ml-4 text-xs uppercase tracking-widest font-light text-[#475569] hover:text-[#1A1A1A] transition-colors"
+            >
+              Send another
+            </button>
+          )}
         </form>
       </Reveal>
 
