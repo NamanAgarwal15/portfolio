@@ -13,10 +13,13 @@ import About from "./pages/About";
 import Work from "./pages/Work";
 import Contact from "./pages/Contact";
 import Guestbook from "./pages/Guestbook";
+import Admin from "./pages/Admin";
+import { useAnalytics } from "./hooks/useAnalytics";
 import { Toaster } from "@/components/ui/sonner";
 
 function AnimatedRoutes() {
   const location = useLocation();
+  useAnalytics();
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -32,6 +35,7 @@ function AnimatedRoutes() {
           <Route path="/work" element={<Work />} />
           <Route path="/guestbook" element={<Guestbook />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </motion.div>
     </AnimatePresence>

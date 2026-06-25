@@ -86,7 +86,7 @@ export default function Admin() {
   if (!user) {
     return (
       <div className="max-w-md mx-auto px-6 py-24 text-center">
-        <SEO title="Admin · Naman Agarwal" description="Admin dashboard" noindex />
+        <SEO title="Admin" description="Admin dashboard" path="/admin" />
         <h1 className="text-2xl font-light mb-4">Admin sign-in required</h1>
         <button
           onClick={() =>
@@ -114,7 +114,7 @@ export default function Admin() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-16">
-      <SEO title="Admin · Naman Agarwal" description="Admin dashboard" noindex />
+      <SEO title="Admin" description="Admin dashboard" path="/admin" />
 
       <motion.div
         initial={{ opacity: 0, y: 12 }}
