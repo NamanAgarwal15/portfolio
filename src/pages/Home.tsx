@@ -48,7 +48,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: name.length * 0.03 + 0.5, duration: 0.5 }}
-        className="mt-10 flex items-center gap-6"
+        className="mt-10 flex items-center gap-6 flex-wrap"
       >
         <Link
           to="/work"
@@ -103,6 +103,26 @@ export default function Home() {
         <p className="mt-3 text-[10px] uppercase tracking-widest text-[#475569] font-light">
           50 brainteasers · auto-rotates every 12s · or hit next
         </p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="mt-20 mb-24 border border-[#1A1A1A]/15 p-8 bg-gradient-to-br from-pink-100 via-amber-100 to-sky-100"
+      >
+        <div className="text-[10px] uppercase tracking-widest text-[#475569]">Bored of resumes?</div>
+        <h3 className="mt-2 text-2xl sm:text-3xl font-light tracking-tight">Skip the small talk.</h3>
+        <p className="mt-2 text-sm font-light text-[#1A1A1A]/80 max-w-xl">
+          Nine mini-games — F1 lights, a full cricket match, UFC reflex, an unbeatable rock-paper-scissors, sudoku in three sizes, and more. Turn on Party Mode while you're at it.
+        </p>
+        <Link
+          to="/arcade?party=1"
+          className="mt-5 inline-block px-6 py-3 text-sm font-medium bg-[#1A1A1A] text-[#F7F5F2] hover:bg-pink-500 transition-colors"
+        >
+          🪩 Take me to the party →
+        </Link>
       </motion.div>
     </section>
   );

@@ -2,13 +2,11 @@ import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Logo from "./Logo";
 
 const links = [
-  { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/work", label: "Work" },
-  { to: "/arcade", label: "Arcade", blink: true },
-  { to: "/guestbook", label: "Guestbook" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -18,8 +16,9 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-md bg-white/60 border-b border-[#475569]/10">
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link to="/" className="font-medium tracking-tight text-[#1A1A1A]">
-          Naman Agarwal
+        <Link to="/" className="flex items-center gap-3 text-[#1A1A1A]" aria-label="Home">
+          <Logo size={28} />
+          <span className="hidden sm:inline font-medium tracking-tight text-sm">Naman Agarwal</span>
         </Link>
 
         <ul className="hidden md:flex items-center gap-8 text-sm font-light">
@@ -28,9 +27,8 @@ export default function Navbar() {
               <NavLink
                 to={l.to}
                 end={l.to === "/"}
-                className={({ isActive }) => `nav-link ${isActive ? "active" : ""} ${l.blink ? "blink-link" : ""}`}
+                className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
               >
-                {l.blink && <span className="blink-dot" aria-hidden />}
                 {l.label}
               </NavLink>
             </li>
@@ -72,9 +70,8 @@ export default function Navbar() {
                     to={l.to}
                     end={l.to === "/"}
                     onClick={() => setOpen(false)}
-                    className={({ isActive }) => `nav-link ${isActive ? "active" : ""} ${l.blink ? "blink-link" : ""}`}
+                    className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
                   >
-                    {l.blink && <span className="blink-dot" aria-hidden />}
                     {l.label}
                   </NavLink>
                 </motion.li>
