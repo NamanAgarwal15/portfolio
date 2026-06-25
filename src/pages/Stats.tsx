@@ -131,9 +131,12 @@ export default function Stats() {
           ))}
           <button
             onClick={() => load(passcode, days)}
-            className="text-xs uppercase tracking-widest px-3 py-1.5 border border-[#1A1A1A]/30 hover:border-[#1A1A1A]"
+            disabled={loading}
+            className="text-xs uppercase tracking-widest px-3 py-1.5 border border-[#1A1A1A] bg-[#1A1A1A] text-[#F7F5F2] hover:bg-[#475569] hover:border-[#475569] transition-colors disabled:opacity-50 inline-flex items-center gap-2"
+            title="Pull latest data"
           >
-            ↻
+            <span className={loading ? "inline-block animate-spin" : "inline-block"}>↻</span>
+            {loading ? "Refreshing…" : "Refresh"}
           </button>
         </div>
       </div>
