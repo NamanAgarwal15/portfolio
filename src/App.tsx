@@ -6,10 +6,13 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Cursor from "./components/Cursor";
 import ScrollProgress from "./components/ScrollProgress";
+import AskNaman from "./components/AskNaman";
+import KonamiEgg from "./components/KonamiEgg";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Work from "./pages/Work";
 import Contact from "./pages/Contact";
+import Guestbook from "./pages/Guestbook";
 import { Toaster } from "@/components/ui/sonner";
 
 function AnimatedRoutes() {
@@ -27,6 +30,7 @@ function AnimatedRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/work" element={<Work />} />
+          <Route path="/guestbook" element={<Guestbook />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </motion.div>
@@ -52,11 +56,13 @@ export default function App() {
     <HashRouter>
       <ScrollProgress />
       <Cursor />
+      <KonamiEgg />
       <Navbar />
       <main className="pt-20">
         <AnimatedRoutes />
       </main>
       <Footer />
+      <AskNaman />
       <Toaster />
     </HashRouter>
   );
