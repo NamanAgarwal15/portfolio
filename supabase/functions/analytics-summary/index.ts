@@ -27,18 +27,20 @@ Deno.serve(async (req) => {
   const days = Math.min(Math.max(Number(url.searchParams.get("days") || 30), 1), 365);
   const since = new Date(Date.now() - days * 86_400_000).toISOString();
 
-  const [views, msgs, guests] = await Promise.all([
+  const [views, msgs, guests, chats] = await Promise.all([
     supabase.from("page_views").select("path, referrer, session_id, created_at, user_agent").gte("created_at", since).order("created_at", { ascending: false }).limit(5000),
     supabase.from("contact_messages").select("id, name, email, subject, message, created_at").order("created_at", { ascending: false }).limit(200),
     supabase.from("guestbook_entries").select("id, display_name, email, message, created_at, hidden").order("created_at", { ascending: false }).limit(200),
+    supabase.from("chatbot_logs").select("id, session_id, prompt, response, message_count, referrer, user_agent, created_at").gte("created_at", since).order("created_at", { ascending: false }).limit(500),
   ]);
 
-  if (views.error || msgs.error || guests.error) {
-    return new Response(JSON.stringify({ error: "query_failed", detail: views.error?.message || msgs.error?.message || guests.error?.message }), {
+  if (views.error || msgs.error || guests.error || chats.error) {
+    return new Response(JSON.stringify({ error: "query_failed", detail: views.error?.message || msgs.error?.message || guests.error?.message || chats.error?.message }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
+
 
   // Aggregate
   const rows = views.data || [];
@@ -73,6 +75,15 @@ Deno.serve(async (req) => {
     .map(([day, v]) => ({ day, views: v.views, sessions: v.sessions.size }))
     .sort((a, b) => a.day.localeCompare(b.day));
 
+  const chatRows = chats.data || [];
+  const chatSessions = new Set(chatRows.map((c) => c.session_id).filter(Boolean)).size;
+  const avgPromptLen = chatRows.length
+    ? Math.round(chatRows.reduce((s, c) => s + (c.prompt?.length || 0), 0) / chatRows.length)
+    : 0;
+  const avgResponseLen = chatRows.length
+    ? Math.round(chatRows.reduce((s, c) => s + (c.response?.length || 0), 0) / chatRows.length)
+    : 0;
+
   return new Response(
     JSON.stringify({
       days,
@@ -81,6 +92,8 @@ Deno.serve(async (req) => {
         sessions,
         messages: msgs.data?.length || 0,
         guestbook: guests.data?.length || 0,
+        chats: chatRows.length,
+        chatSessions,
       },
       topPaths: Object.entries(byPath).map(([path, count]) => ({ path, count })).sort((a, b) => b.count - a.count).slice(0, 12),
       topReferrers: Object.entries(byRef).map(([ref, count]) => ({ ref, count })).sort((a, b) => b.count - a.count).slice(0, 12),
@@ -91,6 +104,8 @@ Deno.serve(async (req) => {
       recentViews: rows.slice(0, 50),
       messages: msgs.data || [],
       guestbook: guests.data || [],
+      chats: chatRows,
+      chatStats: { avgPromptLen, avgResponseLen },
     }),
     { headers: { ...corsHeaders, "Content-Type": "application/json" } },
   );

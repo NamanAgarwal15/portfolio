@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 type Summary = {
   days: number;
-  totals: { views: number; sessions: number; messages: number; guestbook: number };
+  totals: { views: number; sessions: number; messages: number; guestbook: number; chats: number; chatSessions: number };
   topPaths: { path: string; count: number }[];
   topReferrers: { ref: string; count: number }[];
   daily: { day: string; views: number; sessions: number }[];
@@ -13,6 +13,8 @@ type Summary = {
   recentViews: { path: string; referrer: string | null; session_id: string; created_at: string; user_agent: string | null }[];
   messages: { id: string; name: string; email: string; subject: string; message: string; created_at: string }[];
   guestbook: { id: string; display_name: string; email: string | null; message: string; created_at: string; hidden: boolean }[];
+  chats: { id: string; session_id: string | null; prompt: string; response: string | null; message_count: number; referrer: string | null; user_agent: string | null; created_at: string }[];
+  chatStats: { avgPromptLen: number; avgResponseLen: number };
 };
 
 const PASS_KEY = "stats_passcode";
@@ -142,12 +144,14 @@ export default function Stats() {
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-10">
         {[
           { label: "Views", value: data.totals.views },
           { label: "Sessions", value: data.totals.sessions },
           { label: "Messages", value: data.totals.messages },
           { label: "Guestbook", value: data.totals.guestbook },
+          { label: "Chats", value: data.totals.chats },
+          { label: "Chat Sessions", value: data.totals.chatSessions },
         ].map((kpi) => (
           <div key={kpi.label} className="border border-[#1A1A1A]/15 p-5">
             <div className="text-[10px] uppercase tracking-widest font-light text-[#475569]">{kpi.label}</div>
@@ -155,6 +159,7 @@ export default function Stats() {
           </div>
         ))}
       </div>
+
 
       {/* Daily chart */}
       <div className="mt-10 border border-[#1A1A1A]/15 p-5">
@@ -256,6 +261,43 @@ export default function Stats() {
           ))}
         </ul>
       </div>
+
+      {/* Chatbot logs */}
+      <div className="mt-10">
+        <div className="flex items-baseline justify-between gap-4 flex-wrap">
+          <h3 className="text-xs uppercase tracking-widest font-light text-[#475569]">
+            Ask Naman — chats ({data.chats.length})
+          </h3>
+          <div className="text-[10px] uppercase tracking-widest text-[#475569]">
+            avg prompt {data.chatStats.avgPromptLen} chars · avg reply {data.chatStats.avgResponseLen} chars
+          </div>
+        </div>
+        <ul className="mt-4 space-y-3">
+          {data.chats.length === 0 && <li className="text-sm font-light text-[#475569]">No chats yet.</li>}
+          {data.chats.map((c) => (
+            <li key={c.id} className="border border-[#1A1A1A]/15 p-4">
+              <div className="flex justify-between items-start gap-4">
+                <div className="text-[10px] uppercase tracking-widest font-light text-[#475569]">
+                  session {c.session_id ? c.session_id.slice(0, 8) : "—"} · turn {c.message_count}
+                  {c.referrer && <span> · {c.referrer}</span>}
+                </div>
+                <span className="text-[10px] uppercase tracking-widest font-light text-[#475569] whitespace-nowrap">{new Date(c.created_at).toLocaleString()}</span>
+              </div>
+              <div className="mt-2">
+                <div className="text-[10px] uppercase tracking-widest text-[#475569]">Prompt</div>
+                <p className="text-sm font-light whitespace-pre-wrap mt-1">{c.prompt}</p>
+              </div>
+              {c.response && (
+                <div className="mt-3">
+                  <div className="text-[10px] uppercase tracking-widest text-[#475569]">Reply</div>
+                  <p className="text-sm font-light whitespace-pre-wrap mt-1 text-[#475569]">{c.response}</p>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+
 
       {/* Guestbook */}
       <div className="mt-10">

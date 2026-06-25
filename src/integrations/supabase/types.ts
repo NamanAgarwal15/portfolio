@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      chatbot_logs: {
+        Row: {
+          created_at: string
+          id: string
+          message_count: number
+          prompt: string
+          referrer: string | null
+          response: string | null
+          session_id: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message_count?: number
+          prompt: string
+          referrer?: string | null
+          response?: string | null
+          session_id?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message_count?: number
+          prompt?: string
+          referrer?: string | null
+          response?: string | null
+          session_id?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           created_at: string
