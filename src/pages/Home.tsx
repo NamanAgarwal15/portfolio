@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Counter from "@/components/Counter";
+import SEO from "@/components/SEO";
 
 const name = "Naman Agarwal";
 
 export default function Home() {
   return (
     <section className="max-w-5xl mx-auto px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center">
+      <SEO title="Home" description="Naman Agarwal — Computer Science & AI undergraduate at BML Munjal University. Internships, projects, and an AI assistant." path="/" />
       <h1 className="text-5xl sm:text-7xl md:text-8xl font-light tracking-tight leading-[1.05]">
         {name.split("").map((c, i) => (
           <motion.span

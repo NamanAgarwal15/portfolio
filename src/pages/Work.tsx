@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/Section";
+import SEO from "@/components/SEO";
 
 const experience = [
   {
@@ -85,6 +86,7 @@ function Card({ children }: { children: React.ReactNode }) {
 export default function Work() {
   return (
     <section className="max-w-4xl mx-auto px-6 py-20">
+      <SEO title="Work" description="Internships and projects by Naman Agarwal — data analytics, IoT, machine learning, and full-stack work." path="/#/work" />
       <Reveal>
         <h2 className="text-3xl sm:text-4xl font-light tracking-tight">Work</h2>
       </Reveal>

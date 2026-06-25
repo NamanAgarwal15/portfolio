@@ -59,3 +59,17 @@ html.lenis, html.lenis body { height: auto; }
 .arrow-row:hover .arrow {
   transform: translateX(4px);
 }
+
+/* Konami easter egg: brutalist mode (press ↑↑↓↓←→←→ba, ESC to exit) */
+html.brutalist body {
+  background: #ffeb3b !important;
+  color: #0a0a0a !important;
+  font-family: "Courier New", monospace !important;
+}
+html.brutalist * {
+  border-color: #0a0a0a !important;
+  border-radius: 0 !important;
+}
+html.brutalist a, html.brutalist button {
+  text-decoration: underline;
+}

@@ -4,6 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import { z } from "zod";
 import { Reveal } from "@/components/Section";
 import { toast } from "sonner";
+import SEO from "@/components/SEO";
+import { supabase } from "@/integrations/supabase/client";
 
 const rows = [
   { label: "Email", value: "naman.agarwal.23cse@bmu.edu.in", href: "mailto:naman.agarwal.23cse@bmu.edu.in" },
@@ -31,7 +33,7 @@ export default function Contact() {
     if (errors[k]) setErrors((e) => ({ ...e, [k]: "" }));
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitted || submitting) return;
     const result = contactSchema.safeParse(form);
@@ -44,19 +46,21 @@ export default function Contact() {
       return;
     }
     setSubmitting(true);
-    const { name, email, subject, message } = result.data;
-    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-    const mailto = `mailto:naman.agarwal.23cse@bmu.edu.in?subject=${encodeURIComponent(subject)}&body=${body}`;
-    window.location.href = mailto;
-    setTimeout(() => {
+    try {
+      const { error } = await supabase.functions.invoke("send-contact", { body: result.data });
+      if (error) throw error;
       toast.success("Message sent!", {
-        description: "Your email client has been opened. Thanks for reaching out — I'll reply soon.",
+        description: "Thanks for reaching out — I'll reply soon.",
       });
       setForm({ name: "", email: "", subject: "", message: "" });
       setErrors({});
-      setSubmitting(false);
       setSubmitted(true);
-    }, 400);
+    } catch (err: any) {
+      const msg = err?.context?.body ? (await err.context.json?.().catch(() => ({})))?.error : null;
+      toast.error(msg || "Couldn't send — please try again or email me directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
 
@@ -65,6 +69,7 @@ export default function Contact() {
 
   return (
     <section className="max-w-3xl mx-auto px-6 py-20">
+      <SEO title="Contact" description="Get in touch with Naman Agarwal — open for internships, collaborations, and interesting problems." path="/#/contact" />
       <Reveal>
         <h2 className="text-4xl sm:text-5xl font-light tracking-tight">Let's Connect</h2>
       </Reveal>
