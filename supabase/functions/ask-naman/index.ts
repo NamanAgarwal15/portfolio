@@ -1,4 +1,11 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+
+const logger = createClient(
+  Deno.env.get("SUPABASE_URL")!,
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+);
+
 
 const SYSTEM_PROMPT = `You are "Ask Naman", a friendly AI assistant embedded on Naman Agarwal's personal portfolio website. You answer questions visitors (often recruiters) ask about Naman.
 
