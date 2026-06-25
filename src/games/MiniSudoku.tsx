@@ -37,7 +37,7 @@ export default function MiniSudoku() {
   const [seed, setSeed] = useState(0);
   const initial = useMemo(() => makePuzzle(8), [seed]);
   const [grid, setGrid] = useState<(number|null)[][]>(initial.map(r=>[...r]));
-  const [fixed] = useState(initial.map(r => r.map(c => c !== null)));
+  const [fixed, setFixed] = useState<boolean[][]>(initial.map(r => r.map(c => c !== null)));
 
   const fillable = grid.flat().every(Boolean);
   const valid = isValid(grid);
@@ -49,7 +49,7 @@ export default function MiniSudoku() {
     const ng = grid.map(row => [...row]); ng[r][c] = val; setGrid(ng);
   };
 
-  const newGame = () => { setSeed(s => s+1); const p = makePuzzle(8); setGrid(p.map(r=>[...r])); (fixed as boolean[][]).splice(0, fixed.length, ...p.map(r => r.map(c => c !== null))); };
+  const newGame = () => { setSeed(s => s+1); const p = makePuzzle(8); setGrid(p.map(r=>[...r])); setFixed(p.map(r => r.map(c => c !== null))); };
 
   return (
     <div>
