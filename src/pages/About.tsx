@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Reveal } from "@/components/Section";
+import SEO from "@/components/SEO";
 
 const skills = {
   Languages: ["Java", "Python"],
@@ -34,6 +35,7 @@ const achievements = [
 export default function About() {
   return (
     <section className="max-w-4xl mx-auto px-6 py-20">
+      <SEO title="About" description="About Naman Agarwal — CSE undergraduate at BML Munjal University, focused on Data Science, AI, and shipping real systems." path="/#/about" />
       <Reveal>
         <h2 className="text-3xl sm:text-4xl font-light tracking-tight">About</h2>
       </Reveal>
