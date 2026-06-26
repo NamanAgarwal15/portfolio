@@ -126,7 +126,7 @@ export default function Work() {
 
       <div className="mt-16">
         <Reveal>
-          <h3 className="text-xs uppercase tracking-widest text-[#D97706] font-medium">
+          <h3 className="text-xs uppercase tracking-widest text-[#666666] font-medium">
             Experience
           </h3>
         </Reveal>
@@ -137,9 +137,9 @@ export default function Work() {
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <div className="font-medium text-lg">{e.org}</div>
-                    <div className="text-sm font-light text-[#D97706]">{e.role}</div>
+                    <div className="text-sm font-light text-[#666666]">{e.role}</div>
                   </div>
-                  <div className="text-xs font-light text-[#D97706]">
+                  <div className="text-xs font-light text-[#666666]">
                     {e.when} · {e.where}
                   </div>
                 </div>
@@ -156,7 +156,7 @@ export default function Work() {
 
       <div className="mt-20">
         <Reveal>
-          <h3 className="text-xs uppercase tracking-widest text-[#D97706] font-medium">
+          <h3 className="text-xs uppercase tracking-widest text-[#666666] font-medium">
             Projects
           </h3>
         </Reveal>
@@ -167,10 +167,10 @@ export default function Work() {
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <div className="font-medium text-lg">
-                      {p.name} <span className="text-[#D97706] font-light">— {p.subtitle}</span>
+                      {p.name} <span className="text-[#666666] font-light">— {p.subtitle}</span>
                     </div>
                   </div>
-                  <div className="text-xs font-light text-[#D97706]">{p.when}</div>
+                  <div className="text-xs font-light text-[#666666]">{p.when}</div>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {p.tags.map((t) => (

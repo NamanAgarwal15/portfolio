@@ -37,7 +37,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: name.length * 0.03 + 0.1, duration: 0.5 }}
-        className="mt-6 text-lg sm:text-xl font-light text-[#D97706]"
+        className="mt-6 text-lg sm:text-xl font-light text-[#666666]"
       >
         Data Science & AI · BML Munjal University '27
       </motion.p>
@@ -89,7 +89,7 @@ export default function Home() {
               <div className="text-3xl sm:text-5xl font-light tracking-tight">
                 <Counter to={s.value} decimals={s.decimals} />
               </div>
-              <div className="mt-2 text-xs uppercase tracking-widest text-[#D97706] font-light">
+              <div className="mt-2 text-xs uppercase tracking-widest text-[#888888] font-light">
                 {s.label}
               </div>
             </div>
