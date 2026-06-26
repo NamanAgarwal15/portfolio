@@ -25,10 +25,8 @@ html, body {
 
 body {
   background-color: #F5F2EA;
-  background-image: radial-gradient(circle, #B8C4A8 1px, transparent 1px);
-  background-size: 18px 18px;
-  background-attachment: fixed;
 }
+
 
 h1, h2, h3, .font-mono-display {
   font-family: 'Courier New', Courier, monospace;
