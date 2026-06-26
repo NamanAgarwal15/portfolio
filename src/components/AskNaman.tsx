@@ -211,7 +211,7 @@ export default function AskNaman() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.96 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed bottom-24 right-6 z-50 w-[min(92vw,380px)] h-[min(70vh,560px)] bg-[#F5F2EA] border border-[#1A1A1A]/15 shadow-2xl flex flex-col"
+            className="fixed inset-0 sm:inset-auto sm:bottom-24 sm:right-6 z-50 w-screen h-[100dvh] sm:w-[380px] sm:h-[560px] sm:max-w-[92vw] sm:max-h-[70vh] bg-[#F5F2EA] sm:border sm:border-[#1A1A1A]/15 sm:shadow-2xl flex flex-col"
           >
             <div className="px-4 py-3 border-b border-[#1A1A1A]/10 flex items-center gap-2">
               <MessageCircle size={16} />
