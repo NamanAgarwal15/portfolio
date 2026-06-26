@@ -101,3 +101,52 @@ html.brutalist a, html.brutalist button {
 @media (prefers-reduced-motion: reduce) {
   .blink-dot { animation: none; }
 }
+
+/* Glassmorphic depth stage */
+.glass-card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 20px 50px -20px rgba(26, 26, 26, 0.18),
+    0 8px 24px -12px rgba(26, 26, 26, 0.12);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  will-change: transform;
+}
+.glass-card:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 24px 60px -18px rgba(217, 119, 6, 0.28),
+    0 10px 30px -10px rgba(217, 119, 6, 0.18);
+}
+.depth-stage { perspective: 1200px; transform-style: preserve-3d; }
+.tilt-3d { transform-style: preserve-3d; transition: transform 0.25s ease-out; }
+
+.gradient-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.55;
+  pointer-events: none;
+  will-change: transform;
+}
+@keyframes blob-drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(60px, -40px, 0) scale(1.08); }
+}
+@keyframes blob-drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(-50px, 50px, 0) scale(1.12); }
+}
+@keyframes blob-drift-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(40px, 30px, 0) scale(0.95); }
+}
+.blob-a { animation: blob-drift-a 18s ease-in-out infinite; }
+.blob-b { animation: blob-drift-b 22s ease-in-out infinite; }
+.blob-c { animation: blob-drift-c 26s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .blob-a, .blob-b, .blob-c { animation: none; }
+}
