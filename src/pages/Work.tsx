@@ -196,7 +196,7 @@ export default function Work() {
                 <button
                   type="button"
                   onClick={() => setDemoOpen(true)}
-                  className="mt-5 inline-block nav-link text-sm font-light"
+                  className="mt-5 inline-flex items-center nav-link text-sm font-light min-h-[44px]"
                 >
                   Demo →
                 </button>
