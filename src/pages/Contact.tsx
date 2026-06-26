@@ -65,7 +65,7 @@ export default function Contact() {
 
 
   const inputClass =
-    "w-full bg-transparent border-b border-[#D97706]/30 py-3 text-base font-light text-[#1A1A1A] placeholder:text-[#D97706]/60 focus:outline-none focus:border-[#1A1A1A] transition-colors";
+    "w-full bg-transparent border-b border-[#1A1A1A]/20 py-3 text-base font-light text-[#1A1A1A] placeholder:text-[#888888] focus:outline-none focus:border-[#1A1A1A] transition-colors";
 
   return (
     <section className="max-w-3xl mx-auto px-6 py-20">
@@ -74,7 +74,7 @@ export default function Contact() {
         <h2 className="text-4xl sm:text-5xl font-light tracking-tight">Let's Connect</h2>
       </Reveal>
       <Reveal delay={0.05}>
-        <p className="mt-5 font-light text-[#D97706]">
+        <p className="mt-5 font-light text-[#666666]">
           I'm open to internships, collaborations, and interesting problems.
         </p>
       </Reveal>
@@ -84,7 +84,7 @@ export default function Contact() {
           <fieldset disabled={submitting || submitted} className="space-y-8 disabled:opacity-60 transition-opacity">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
-              <label htmlFor="name" className="block text-xs uppercase tracking-widest font-light text-[#D97706] mb-2">
+              <label htmlFor="name" className="block text-xs uppercase tracking-widest font-light text-[#666666] mb-2">
                 Name
               </label>
               <input
@@ -99,7 +99,7 @@ export default function Contact() {
               {errors.name && <p className="mt-2 text-xs text-red-600 font-light">{errors.name}</p>}
             </div>
             <div>
-              <label htmlFor="email" className="block text-xs uppercase tracking-widest font-light text-[#D97706] mb-2">
+              <label htmlFor="email" className="block text-xs uppercase tracking-widest font-light text-[#666666] mb-2">
                 Email
               </label>
               <input
@@ -116,7 +116,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="subject" className="block text-xs uppercase tracking-widest font-light text-[#D97706] mb-2">
+            <label htmlFor="subject" className="block text-xs uppercase tracking-widest font-light text-[#666666] mb-2">
               Subject
             </label>
             <input
@@ -132,7 +132,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-xs uppercase tracking-widest font-light text-[#D97706] mb-2">
+            <label htmlFor="message" className="block text-xs uppercase tracking-widest font-light text-[#666666] mb-2">
               Message
             </label>
             <textarea
@@ -150,7 +150,7 @@ export default function Contact() {
               ) : (
                 <span />
               )}
-              <p className="text-xs font-light text-[#D97706]/70">{form.message.length}/1000</p>
+              <p className="text-xs font-light text-[#666666]/70">{form.message.length}/1000</p>
             </div>
           </div>
           </fieldset>
@@ -172,7 +172,7 @@ export default function Contact() {
             <button
               type="button"
               onClick={() => setSubmitted(false)}
-              className="ml-4 text-xs uppercase tracking-widest font-light text-[#D97706] hover:text-[#1A1A1A] transition-colors"
+              className="ml-4 text-xs uppercase tracking-widest font-light text-[#666666] hover:text-[#1A1A1A] transition-colors"
             >
               Send another
             </button>
@@ -181,7 +181,7 @@ export default function Contact() {
       </Reveal>
 
       <Reveal delay={0.15}>
-        <div className="mt-20 mb-4 text-xs uppercase tracking-widest font-light text-[#D97706]">
+        <div className="mt-20 mb-4 text-xs uppercase tracking-widest font-light text-[#666666]">
           Or reach me directly
         </div>
       </Reveal>
@@ -193,7 +193,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 + i * 0.08, duration: 0.45, ease: "easeOut" }}
-            className="border-b border-[#D97706]/15"
+            className="border-b border-[#1A1A1A]/10"
           >
             <a
               href={r.href}
@@ -201,19 +201,19 @@ export default function Contact() {
               rel="noreferrer"
               className="arrow-row flex items-center justify-between py-5 group"
             >
-              <span className="text-xs uppercase tracking-widest font-light text-[#D97706]">
+              <span className="text-xs uppercase tracking-widest font-light text-[#666666]">
                 {r.label}
               </span>
               <span className="flex items-center gap-3">
                 <span className="font-light text-[#1A1A1A]">{r.value}</span>
-                <ArrowUpRight size={16} className="arrow text-[#D97706]" />
+                <ArrowUpRight size={16} className="arrow text-[#666666]" />
               </span>
             </a>
           </motion.li>
         ))}
       </ul>
 
-      <div className="mt-12 text-xs font-light text-[#D97706]">
+      <div className="mt-12 text-xs font-light text-[#666666]">
         <a href="#/arcade" className="nav-link">or test your F1 reflexes →</a>
       </div>
     </section>

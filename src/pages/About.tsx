@@ -57,13 +57,13 @@ export default function About() {
 
       <div className="mt-20">
         <Reveal>
-          <h3 className="text-xs uppercase tracking-widest text-[#D97706] font-medium">Skills</h3>
+          <h3 className="text-xs uppercase tracking-widest text-[#666666] font-medium">Skills</h3>
         </Reveal>
         <div className="mt-8 space-y-8">
           {Object.entries(skills).map(([group, { items, quip }]) => (
             <Reveal key={group}>
               <div data-companion={quip || undefined}>
-                <div className="text-xs uppercase tracking-widest text-[#D97706]/80 font-light">
+                <div className="text-xs uppercase tracking-widest text-[#666666]/80 font-light">
                   {group}
                 </div>
                 <motion.div
@@ -81,7 +81,6 @@ export default function About() {
                         show: { opacity: 1, y: 0 },
                       }}
                       className="border border-[#D97706]/60 rounded-full px-4 py-1.5 text-sm font-light text-[#1A1A1A]"
-                      style={{ fontFamily: "'Courier New', Courier, monospace" }}
                     >
                       {s}
                     </motion.span>
@@ -95,16 +94,16 @@ export default function About() {
 
       <div className="mt-20">
         <Reveal>
-          <h3 className="text-xs uppercase tracking-widest text-[#D97706] font-medium">
+          <h3 className="text-xs uppercase tracking-widest text-[#666666] font-medium">
             Education
           </h3>
         </Reveal>
-        <ul className="mt-8 divide-y divide-[#D97706]/15">
+        <ul className="mt-8 divide-y divide-[#1A1A1A]/10">
           {education.map((e, i) => (
             <Reveal key={i} delay={i * 0.05}>
               <li className="py-5">
                 <div className="font-medium">{e.title}</div>
-                <div className="text-sm font-light text-[#D97706] mt-1">{e.sub}</div>
+                <div className="text-sm font-light text-[#666666] mt-1">{e.sub}</div>
               </li>
             </Reveal>
           ))}
@@ -113,7 +112,7 @@ export default function About() {
 
       <div className="mt-20">
         <Reveal>
-          <h3 className="text-xs uppercase tracking-widest text-[#D97706] font-medium">
+          <h3 className="text-xs uppercase tracking-widest text-[#666666] font-medium">
             Achievements
           </h3>
         </Reveal>

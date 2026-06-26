@@ -110,7 +110,7 @@ const projects = [
 
 function Card({ children, companion }: { children: React.ReactNode; companion?: string }) {
   return (
-    <div data-companion={companion} className="border border-[#D97706]/25 p-6 sm:p-8 bg-white transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(217,119,6,0.25)]">
+    <div data-companion={companion} className="border border-[#1A1A1A]/15 p-6 sm:p-8 bg-white transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.15)]">
       {children}
     </div>
   );
@@ -126,7 +126,7 @@ export default function Work() {
 
       <div className="mt-16">
         <Reveal>
-          <h3 className="text-xs uppercase tracking-widest text-[#D97706] font-medium">
+          <h3 className="text-xs uppercase tracking-widest text-[#666666] font-medium">
             Experience
           </h3>
         </Reveal>
@@ -137,9 +137,9 @@ export default function Work() {
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <div className="font-medium text-lg">{e.org}</div>
-                    <div className="text-sm font-light text-[#D97706]">{e.role}</div>
+                    <div className="text-sm font-light text-[#666666]">{e.role}</div>
                   </div>
-                  <div className="text-xs font-light text-[#D97706]">
+                  <div className="text-xs font-light text-[#666666]">
                     {e.when} · {e.where}
                   </div>
                 </div>
@@ -156,7 +156,7 @@ export default function Work() {
 
       <div className="mt-20">
         <Reveal>
-          <h3 className="text-xs uppercase tracking-widest text-[#D97706] font-medium">
+          <h3 className="text-xs uppercase tracking-widest text-[#666666] font-medium">
             Projects
           </h3>
         </Reveal>
@@ -167,17 +167,16 @@ export default function Work() {
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <div className="font-medium text-lg">
-                      {p.name} <span className="text-[#D97706] font-light">— {p.subtitle}</span>
+                      {p.name} <span className="text-[#666666] font-light">— {p.subtitle}</span>
                     </div>
                   </div>
-                  <div className="text-xs font-light text-[#D97706]">{p.when}</div>
+                  <div className="text-xs font-light text-[#666666]">{p.when}</div>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {p.tags.map((t) => (
                     <span
                       key={t}
                       className="border border-[#D97706]/60 rounded-full px-3 py-1 text-xs font-light"
-                      style={{ fontFamily: "'Courier New', Courier, monospace" }}
                     >
                       {t}
                     </span>
