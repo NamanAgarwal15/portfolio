@@ -7,8 +7,8 @@ const name = "Naman Agarwal";
 
 const STATS = [
   { value: 7.93, decimals: 2, label: "CGPA", quip: "7.93 out of 10. The 0.07 was sacrificed to shipping actual projects." },
-  { value: 4, decimals: 0, label: "Internships", quip: "4 internships before final year. Data science, IoT, marketing, web dev — he couldn't pick one so he did all of them." },
-  { value: 4, decimals: 0, label: "Projects", quip: "4 projects. All of them actually work. Most of the time." },
+  { value: 4, decimals: 0, label: "Internships", to: "/work", quip: "4 internships before final year. Data science, IoT, marketing, web dev — he couldn't pick one so he did all of them." },
+  { value: 4, decimals: 0, label: "Projects", to: "/work", quip: "4 projects. All of them actually work. Most of the time." },
 ];
 
 export default function Home() {
@@ -65,6 +65,12 @@ export default function Home() {
         >
           View My Work
         </Link>
+        <Link
+          to="/about"
+          className="border border-[#1A1A1A] px-6 py-3 text-sm font-medium hover:bg-[#1A1A1A] hover:text-[#F5F2EA] transition-colors duration-300"
+        >
+          About
+        </Link>
         <a
           href={`${import.meta.env.BASE_URL}Naman_Agarwal.pdf`}
           download="Naman_Agarwal.pdf"
@@ -85,16 +91,32 @@ export default function Home() {
       >
         <div className="h-px bg-[#1A1A1A]/15 w-full" />
         <div className="mt-10 grid grid-cols-3 gap-6">
-          {STATS.map((s) => (
-            <div key={s.label} data-companion={s.quip}>
-              <div className="text-3xl sm:text-5xl font-light tracking-tight text-[#1A1A1A]">
-                <Counter to={s.value} decimals={s.decimals} />
+          {STATS.map((s) => {
+            const inner = (
+              <>
+                <div className="text-3xl sm:text-5xl font-light tracking-tight text-[#1A1A1A]">
+                  <Counter to={s.value} decimals={s.decimals} />
+                </div>
+                <div className="mt-2 text-xs uppercase tracking-widest text-[#888888] font-light">
+                  {s.label}
+                </div>
+              </>
+            );
+            return s.to ? (
+              <Link
+                key={s.label}
+                to={s.to}
+                data-companion={s.quip}
+                className="block group transition-opacity hover:opacity-80"
+              >
+                {inner}
+              </Link>
+            ) : (
+              <div key={s.label} data-companion={s.quip}>
+                {inner}
               </div>
-              <div className="mt-2 text-xs uppercase tracking-widest text-[#888888] font-light">
-                {s.label}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </motion.div>
     </section>
