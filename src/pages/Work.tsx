@@ -81,9 +81,9 @@ const projects = [
   },
 ];
 
-function Card({ children }: { children: React.ReactNode }) {
+function Card({ children, companion }: { children: React.ReactNode; companion?: string }) {
   return (
-    <div className="border border-[#475569]/25 p-6 sm:p-8 bg-white/40 transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(71,85,105,0.25)]">
+    <div data-companion={companion} className="border border-[#475569]/25 p-6 sm:p-8 bg-white/40 transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(71,85,105,0.25)]">
       {children}
     </div>
   );
@@ -106,7 +106,7 @@ export default function Work() {
         <div className="mt-8 space-y-6">
           {experience.map((e, i) => (
             <Reveal key={i} delay={i * 0.05}>
-              <Card>
+              <Card companion={e.quip}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <div className="font-medium text-lg">{e.org}</div>
@@ -136,7 +136,7 @@ export default function Work() {
         <div className="mt-8 space-y-6">
           {projects.map((p, i) => (
             <Reveal key={i} delay={i * 0.05}>
-              <Card>
+              <Card companion={p.quip}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <div className="font-medium text-lg">

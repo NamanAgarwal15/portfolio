@@ -2,19 +2,23 @@ import { motion } from "framer-motion";
 import { Reveal } from "@/components/Section";
 import SEO from "@/components/SEO";
 
-const skills = {
-  Languages: ["Java", "Python"],
-  "Frameworks & Libraries": [
-    "NumPy",
-    "pandas",
-    "scikit-learn",
-    "Matplotlib",
-    "Seaborn",
-    "OpenCV",
-    "TensorFlow",
-  ],
-  Tools: ["MySQL", "Git", "JIRA", "VS Code", "Kaggle Notebooks", "Excel"],
-  Concepts: ["OOP", "DBMS", "Algorithms", "Agile Development"],
+const skills: Record<string, { items: string[]; quip: string }> = {
+  Languages: {
+    items: ["Java", "Python"],
+    quip: "Java for interviews. Python for everything real. He knows the difference.",
+  },
+  "Frameworks & Libraries": {
+    items: ["NumPy", "pandas", "scikit-learn", "Matplotlib", "Seaborn", "OpenCV", "TensorFlow"],
+    quip: "NumPy to TensorFlow. He's used all of these in actual projects, not just listed them.",
+  },
+  Tools: {
+    items: ["MySQL", "Git", "JIRA", "VS Code", "Kaggle Notebooks", "Excel"],
+    quip: "JIRA user since internship one. Has opinions about sprint planning now. Unsolicited ones.",
+  },
+  Concepts: {
+    items: ["OOP", "DBMS", "Algorithms", "Agile Development"],
+    quip: "",
+  },
 };
 
 const education = [
@@ -53,31 +57,33 @@ export default function About() {
           <h3 className="text-xs uppercase tracking-widest text-[#475569] font-medium">Skills</h3>
         </Reveal>
         <div className="mt-8 space-y-8">
-          {Object.entries(skills).map(([group, items]) => (
+          {Object.entries(skills).map(([group, { items, quip }]) => (
             <Reveal key={group}>
-              <div className="text-xs uppercase tracking-widest text-[#475569]/80 font-light">
-                {group}
+              <div data-companion={quip || undefined}>
+                <div className="text-xs uppercase tracking-widest text-[#475569]/80 font-light">
+                  {group}
+                </div>
+                <motion.div
+                  className="mt-3 flex flex-wrap gap-2"
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  variants={{ show: { transition: { staggerChildren: 0.05 } } }}
+                >
+                  {items.map((s) => (
+                    <motion.span
+                      key={s}
+                      variants={{
+                        hidden: { opacity: 0, y: 12 },
+                        show: { opacity: 1, y: 0 },
+                      }}
+                      className="border border-[#475569]/60 rounded-full px-4 py-1.5 text-sm font-light text-[#1A1A1A]"
+                    >
+                      {s}
+                    </motion.span>
+                  ))}
+                </motion.div>
               </div>
-              <motion.div
-                className="mt-3 flex flex-wrap gap-2"
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={{ show: { transition: { staggerChildren: 0.05 } } }}
-              >
-                {items.map((s) => (
-                  <motion.span
-                    key={s}
-                    variants={{
-                      hidden: { opacity: 0, y: 12 },
-                      show: { opacity: 1, y: 0 },
-                    }}
-                    className="border border-[#475569]/60 rounded-full px-4 py-1.5 text-sm font-light text-[#1A1A1A]"
-                  >
-                    {s}
-                  </motion.span>
-                ))}
-              </motion.div>
             </Reveal>
           ))}
         </div>

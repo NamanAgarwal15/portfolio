@@ -212,6 +212,10 @@ export default function Contact() {
           </motion.li>
         ))}
       </ul>
+
+      <div className="mt-12 text-xs font-light text-[#475569]">
+        <a href="#/arcade" className="nav-link">or test your F1 reflexes →</a>
+      </div>
     </section>
   );
 }
