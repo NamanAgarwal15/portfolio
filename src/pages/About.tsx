@@ -31,8 +31,7 @@ const education = [
 ];
 
 const achievements = [
-  "Second Place, TechSparx.I Showcase (BMU) — 80+ teams — Smart Wildfire-Fighting Robot",
-  "First Runner-Up, TechSparx.I Showcase (BMU) — 80+ teams — DriveSafe-IND",
+  "First Runner-Up, TechSparx.I Showcase (BMU) — 80+ teams — Smart Wildfire-Fighting Robot",
   "Co-Chair, Innovation Vertical, Young Indians BMU — Aug 2024 to Aug 2025",
   "Foundations of Project Management — Google, Coursera, May 2026",
 ];
