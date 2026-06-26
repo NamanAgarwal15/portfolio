@@ -100,9 +100,11 @@ html.brutalist a, html.brutalist button {
   .blink-dot { animation: none; }
 }
 
-/* Glassmorphic depth stage — perf-tuned: avoid backdrop-blur over animated blobs */
+/* Glassmorphic cards — kept on all viewports; perf comes from static blobs on mobile */
 .glass-card {
-  background: rgba(255, 253, 248, 0.78);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px) saturate(135%);
+  -webkit-backdrop-filter: blur(10px) saturate(135%);
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.6) inset,
@@ -116,12 +118,12 @@ html.brutalist a, html.brutalist button {
     0 24px 60px -18px rgba(217, 119, 6, 0.28),
     0 10px 30px -10px rgba(217, 119, 6, 0.18);
 }
-/* Only apply real backdrop-blur on large screens & non-reduced-motion */
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+/* On small screens, slightly lighter blur to stay smooth */
+@media (max-width: 1023px) {
   .glass-card {
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(10px) saturate(135%);
-    -webkit-backdrop-filter: blur(10px) saturate(135%);
+    backdrop-filter: blur(8px) saturate(130%);
+    -webkit-backdrop-filter: blur(8px) saturate(130%);
+    background: rgba(255, 253, 248, 0.6);
   }
 }
 .depth-stage { perspective: 1200px; }
