@@ -56,12 +56,8 @@ export default function Home() {
     <section ref={stageRef} className="relative max-w-5xl mx-auto px-4 sm:px-6 min-h-[calc(100vh-5rem)] py-10 sm:py-16 depth-stage overflow-visible">
       <SEO fullTitle="Naman Agarwal — Data Science & AI | Portfolio" title="Home" description="Naman Agarwal — Computer Science & AI undergraduate at BML Munjal University. Internships, projects, and an AI assistant." path="/" />
 
-      {/* Layer 1 — background gradient blobs */}
-      <motion.div aria-hidden style={{ y: yBlobs }} className="pointer-events-none absolute inset-0 -z-10">
-        <div className="gradient-blob blob-a" style={{ width: 520, height: 520, top: -120, left: -160, background: "radial-gradient(circle at 30% 30%, #D97706, transparent 60%)" }} />
-        <div className="gradient-blob blob-b" style={{ width: 460, height: 460, top: 120, right: -140, background: "radial-gradient(circle at 60% 40%, #B8C4A8, transparent 65%)" }} />
-        <div className="gradient-blob blob-c" style={{ width: 420, height: 420, bottom: -120, left: "30%", background: "radial-gradient(circle at 50% 50%, #F2C57C, transparent 65%)" }} />
-      </motion.div>
+      {/* Background blobs are provided globally by <GlassBackground />; this page parallaxes the foreground only */}
+
 
       {/* Layer 3 — foreground (hero text + CTAs) */}
       <motion.div style={{ y: yFore }} className="relative">
