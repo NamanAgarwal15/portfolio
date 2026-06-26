@@ -121,22 +121,20 @@ export default function Work() {
   const [demoOpen, setDemoOpen] = useState(false);
 
   return (
-    <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+    <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20 space-y-12">
       <SEO fullTitle="Work & Projects — Naman Agarwal | DriveSafe-IND, Winlytics" title="Work" description="Internships and projects by Naman Agarwal — data analytics, IoT, machine learning, and full-stack work." path="/#/work" />
       <Reveal>
         <h2 className="text-3xl sm:text-4xl font-light tracking-tight">Work</h2>
       </Reveal>
 
-      <div className="mt-16">
+      <div>
         <Reveal>
-          <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold">
-            Experience
-          </h3>
+          <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold mb-6">Experience</h3>
         </Reveal>
-        <ul className="mt-8 divide-y divide-[#1A1A1A]/10">
+        <div className="grid grid-cols-1 gap-5">
           {experience.map((e, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <li className="py-8" data-companion={e.quip}>
+            <Reveal key={i} delay={i * 0.08}>
+              <div className="glass-card rounded-3xl p-6 sm:p-8" data-companion={e.quip}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <div className="font-medium text-lg">{e.org}</div>
@@ -151,22 +149,20 @@ export default function Work() {
                     <li key={j}>— {b}</li>
                   ))}
                 </ul>
-              </li>
+              </div>
             </Reveal>
           ))}
-        </ul>
+        </div>
       </div>
 
-      <div className="mt-20">
+      <div>
         <Reveal>
-          <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold">
-            Projects
-          </h3>
+          <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold mb-6">Projects</h3>
         </Reveal>
-        <ul className="mt-8 divide-y divide-[#1A1A1A]/10">
+        <div className="grid grid-cols-1 gap-5">
           {projects.map((p, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <li className="py-8" data-companion={p.quip}>
+            <Reveal key={i} delay={i * 0.08}>
+              <div className="glass-card rounded-3xl p-6 sm:p-8" data-companion={p.quip}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <div className="font-medium text-lg">
@@ -182,7 +178,7 @@ export default function Work() {
                   {p.tags.map((t) => (
                     <span
                       key={t}
-                      className="border border-[#D97706]/60 rounded-full px-3 py-1 text-xs font-light"
+                      className="bg-white/50 border border-white/60 backdrop-blur rounded-full px-3 py-1 text-xs font-light"
                     >
                       {t}
                     </span>
@@ -200,14 +196,14 @@ export default function Work() {
                 >
                   Demo →
                 </button>
-              </li>
+              </div>
             </Reveal>
           ))}
-        </ul>
+        </div>
       </div>
 
       <Dialog open={demoOpen} onOpenChange={setDemoOpen}>
-        <DialogContent className="bg-[#F5F2EA] border border-[#1A1A1A]/15 shadow-2xl">
+        <DialogContent className="glass-card border-0 rounded-3xl">
           <DialogHeader>
             <DialogTitle className="text-[#1A1A1A]">Live demo coming soon</DialogTitle>
             <DialogDescription className="text-[#1A1A1A]/75">
@@ -218,14 +214,14 @@ export default function Work() {
             <a
               href={`${import.meta.env.BASE_URL}Naman_Agarwal.pdf`}
               download
-              className="inline-flex items-center justify-center rounded-md bg-[#1A1A1A] text-white px-4 py-2 text-sm font-light hover:bg-[#1A1A1A]/90 transition-colors"
+              className="inline-flex items-center justify-center rounded-xl bg-[#1A1A1A] text-white px-4 py-2 text-sm font-light hover:bg-[#1A1A1A]/90 transition-colors"
             >
               Download Resume ↓
             </a>
             <button
               type="button"
               onClick={() => setDemoOpen(false)}
-              className="inline-flex items-center justify-center rounded-md border border-[#1A1A1A]/20 px-4 py-2 text-sm font-light hover:bg-[#1A1A1A]/5 transition-colors"
+              className="inline-flex items-center justify-center rounded-xl glass-card px-4 py-2 text-sm font-light"
             >
               Close
             </button>
