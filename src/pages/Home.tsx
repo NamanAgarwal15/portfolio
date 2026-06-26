@@ -14,7 +14,7 @@ const STATS = [
 export default function Home() {
   return (
     <section className="max-w-5xl mx-auto px-4 sm:px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center py-10 sm:py-0">
-      <SEO title="Home" description="Naman Agarwal — Computer Science & AI undergraduate at BML Munjal University. Internships, projects, and an AI assistant." path="/" />
+      <SEO fullTitle="Naman Agarwal — Data Science & AI | Portfolio" title="Home" description="Naman Agarwal — Computer Science & AI undergraduate at BML Munjal University. Internships, projects, and an AI assistant." path="/" />
       <div style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: "13px", color: "#D97706", opacity: 0.8 }} className="mb-4">
         // cs undergrad · data science & ai · builder
       </div>

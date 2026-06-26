@@ -122,7 +122,7 @@ export default function Work() {
 
   return (
     <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
-      <SEO title="Work" description="Internships and projects by Naman Agarwal — data analytics, IoT, machine learning, and full-stack work." path="/#/work" />
+      <SEO fullTitle="Work & Projects — Naman Agarwal | DriveSafe-IND, Winlytics" title="Work" description="Internships and projects by Naman Agarwal — data analytics, IoT, machine learning, and full-stack work." path="/#/work" />
       <Reveal>
         <h2 className="text-3xl sm:text-4xl font-light tracking-tight">Work</h2>
       </Reveal>

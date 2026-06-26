@@ -69,7 +69,7 @@ export default function Contact() {
 
   return (
     <section className="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
-      <SEO title="Contact" description="Get in touch with Naman Agarwal — open for internships, collaborations, and interesting problems." path="/#/contact" />
+      <SEO fullTitle="Contact — Naman Agarwal | Open to Internships" title="Contact" description="Get in touch with Naman Agarwal — open for internships, collaborations, and interesting problems." path="/#/contact" />
       <Reveal>
         <h2 className="text-4xl sm:text-5xl font-light tracking-tight">Let's Connect</h2>
       </Reveal>

@@ -5,7 +5,7 @@ import F1Lights from "@/games/F1Lights";
 export default function Arcade() {
   return (
     <section className="max-w-3xl mx-auto px-6 py-10">
-      <SEO title="F1 Reaction Test" description="Test your F1 reflexes — lights out and away we go." path="/arcade" />
+      <SEO fullTitle="F1 Reaction Test — Naman Agarwal" title="F1 Reaction Test" description="Test your F1 reflexes — lights out and away we go." path="/#/arcade" />
       <div className="mb-8">
         <div className="text-[10px] uppercase tracking-widest text-[#D97706] font-light">Arcade</div>
         <h1 className="text-4xl sm:text-5xl font-light tracking-tight mt-2">F1 Reaction Test</h1>
