@@ -1,5 +1,14 @@
+import { useState } from "react";
 import { Reveal } from "@/components/Section";
 import SEO from "@/components/SEO";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 const experience = [
   {
@@ -117,6 +126,8 @@ function Card({ children, companion }: { children: React.ReactNode; companion?: 
 }
 
 export default function Work() {
+  const [demoOpen, setDemoOpen] = useState(false);
+
   return (
     <section className="max-w-4xl mx-auto px-6 py-20">
       <SEO title="Work" description="Internships and projects by Naman Agarwal — data analytics, IoT, machine learning, and full-stack work." path="/#/work" />
@@ -187,17 +198,46 @@ export default function Work() {
                     <li key={j}>— {b}</li>
                   ))}
                 </ul>
-                <a
-                  href={p.link}
+                <button
+                  type="button"
+                  onClick={() => setDemoOpen(true)}
                   className="mt-5 inline-block nav-link text-sm font-light"
                 >
                   Demo →
-                </a>
+                </button>
+
               </Card>
             </Reveal>
           ))}
         </div>
       </div>
+
+      <Dialog open={demoOpen} onOpenChange={setDemoOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Live demo coming soon</DialogTitle>
+            <DialogDescription>
+              Download my resume for the demo — it has the writeup, results, and links in one place.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="sm:justify-start gap-2">
+            <a
+              href={`${import.meta.env.BASE_URL}Naman_Agarwal.pdf`}
+              download
+              className="inline-flex items-center justify-center rounded-md bg-[#1A1A1A] text-white px-4 py-2 text-sm font-light hover:bg-[#1A1A1A]/90 transition-colors"
+            >
+              Download Resume ↓
+            </a>
+            <button
+              type="button"
+              onClick={() => setDemoOpen(false)}
+              className="inline-flex items-center justify-center rounded-md border border-[#1A1A1A]/20 px-4 py-2 text-sm font-light hover:bg-[#1A1A1A]/5 transition-colors"
+            >
+              Close
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
