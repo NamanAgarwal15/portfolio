@@ -126,6 +126,8 @@ function Card({ children, companion }: { children: React.ReactNode; companion?: 
 }
 
 export default function Work() {
+  const [demoOpen, setDemoOpen] = useState(false);
+
   return (
     <section className="max-w-4xl mx-auto px-6 py-20">
       <SEO title="Work" description="Internships and projects by Naman Agarwal — data analytics, IoT, machine learning, and full-stack work." path="/#/work" />
