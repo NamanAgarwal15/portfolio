@@ -18,7 +18,7 @@ export default function Navbar() {
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 text-[#1A1A1A]" aria-label="Home">
           <Logo size={28} />
-          <span className="hidden sm:inline font-medium tracking-tight text-sm" style={{ fontFamily: "'Courier New', Courier, monospace" }}>Naman Agarwal</span>
+          <span className="hidden min-[380px]:inline font-medium tracking-tight text-sm truncate max-w-[60vw]" style={{ fontFamily: "'Courier New', Courier, monospace" }}>Naman Agarwal</span>
         </Link>
 
         <ul className="hidden md:flex items-center gap-8 text-sm font-light">
