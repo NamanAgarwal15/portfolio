@@ -1,82 +1,50 @@
-## Vision
+## Goal
+Make Ask Naman accurate, harder to break, and nicer to use — without changing the floating-bubble format.
 
-Lean into **playful & experimental** while keeping the minimal Swiss base. Think: cursor that reacts, weird-but-tasteful micro-interactions, hidden moments — paired with real backend features that make the site genuinely useful for recruiters.
+## 1. Knowledge upgrade (biggest win)
+Right now the system prompt is a thin bio. Replace it with a structured "Naman knowledge pack" derived from the actual site content so answers match what's on the page.
 
-This requires enabling **Lovable Cloud** (database, auth, edge functions, AI gateway). All "backend" below runs there — no external accounts needed from you.
+- Create `supabase/functions/ask-naman/knowledge.ts` exporting one long string with sections:
+  - **Profile** — bio paragraph from About, education, CGPA, location, contact, links.
+  - **Skills** — grouped Languages / Frameworks / Tools / Concepts.
+  - **Experience** — all 5 cards (Arista Vault, Smart Eye, Yi Co-Chair, Talent Carve, Agaamin) with dates, location, and the exact bullets.
+  - **Projects** — DriveSafe-IND, Winlytics, Smart Wildfire Robot with tech tags, metrics, and outcome (TechSparx 2nd place, 0.648 mAP, etc.).
+  - **Achievements** — Runner-Up TechSparx, Yi Co-Chair, Google PM cert.
+  - **Tone guide** — dry, witty, factual; never invent salary/availability; recommend resume/LinkedIn when unsure.
+- Import it into `index.ts` and use as the system prompt.
 
----
+## 2. Guardrails
+- **Rate limit**: max 8 messages per session per 10 min (track in memory by `sessionId`; return 429 with a friendly message).
+- **Input cap**: reject prompts >1000 chars with a clear error.
+- **Refusal scope**: system prompt instructs the bot to decline questions unrelated to Naman / his work / hiring, and to redirect to email.
+- **No PII echo**: never repeat phone numbers or addresses even if asked.
 
-## 1. Working Contact Form (real email delivery)
-Replace the current `mailto:` handoff with a true send.
+## 3. UX polish
+- **Textarea** instead of `<input>`: auto-grow, Enter to send, Shift+Enter for newline.
+- **Reset conversation** button in the header (trash icon) — clears `messages` and rotates `sessionId`.
+- **Copy** button on each assistant bubble.
+- **Stop** button while streaming (aborts via `AbortController`).
+- **Error toast** via existing `sonner` when fetch fails or backend returns 429/402.
+- **Persist** the open conversation in `sessionStorage` so accidental panel close doesn't wipe it.
+- **Suggested follow-ups**: after each answer, show 2 quick chips ("Tell me about DriveSafe", "How can I contact him?"). Hardcoded list, rotates by topic keyword.
 
-- Edge function `send-contact` validates input (zod) and emails you via Lovable Emails (built‑in, no Resend account needed).
-- Stores every submission in a `contact_messages` table so nothing is lost if email bounces.
-- Honeypot + simple rate limit (1 submission / 30s per IP) to kill spam.
-- Keeps the existing success toast + lock UI you already like.
+## 4. Identity / polish
+- Replace the `Sparkles` icon on the launcher with the project's `Logo` N mark so the bot feels like Naman, not a generic AI widget.
+- Header subtitle changes from "AI · may be wrong" to "Trained on Naman's portfolio · may be wrong".
 
-## 2. Guestbook
-A playful public wall where visitors leave a short note.
+## 5. Stats integration (already partly there)
+- Make sure `chatbot_logs` continues to capture: prompt, response, session_id, message_count, UA, referrer. No schema change needed.
+- Add `error` column (text, nullable) so failed calls show up in `/stats` instead of vanishing. One migration.
 
-- Sign in with Google (one click) → leave a message (max 140 chars).
-- Live feed with subtle stagger-in animation; newest on top.
-- RLS: anyone can read, only authenticated users can insert their own row, only owner/admin can delete.
-- Light moderation: profanity filter + you (admin role) can hide rows from a tiny `/admin` route.
+## Out of scope (ask before adding)
+- Tool calling (e.g. "open my resume", "navigate to /work").
+- Vector search / RAG — knowledge is small enough to fit in a system prompt.
+- Multi-language support.
+- Voice input/output.
 
-## 3. "Ask Naman" AI Chat
-Floating button bottom-right opens a chat panel. Streaming responses from Lovable AI (Gemini), grounded in a system prompt built from your bio, skills, experience, projects, and resume PDF text. Recruiters can ask "what's his React experience?" and get an instant answer. Includes 3 suggested starter questions and a "this is AI, may be wrong" disclaimer.
+## Technical notes
+- Files touched: `src/components/AskNaman.tsx`, `supabase/functions/ask-naman/index.ts`, new `supabase/functions/ask-naman/knowledge.ts`, one migration for `chatbot_logs.error`.
+- No new dependencies; uses existing `react-markdown`, `sonner`, `lucide-react`, Lovable AI Gateway.
+- Rate limit is in-memory per edge instance — good enough for portfolio traffic; if abuse appears we move it to a DB table.
 
-## 4. Visitor Analytics Dashboard
-Lightweight, privacy-friendly (no cookies, no third-party).
-
-- Tiny client beacon → `track-pageview` edge function → `page_views` table (path, referrer, country from CF headers, hashed IP, timestamp).
-- Private `/admin` route (your user only) with:
-  - Total views / unique visitors (7d, 30d, all-time)
-  - Top pages, top referrers, country breakdown
-  - Sparkline of last 30 days
-
-## 5. SEO + OG Images
-- Per-route `<title>`, meta description, canonical via `react-helmet-async`.
-- JSON-LD `Person` schema on home, `WebSite` sitewide.
-- `sitemap.xml` + `robots.txt`.
-- Generated OG image (1200x630) per page — branded, with name + page title.
-
-## 6. Playful & Experimental Layer (visual flair to match the tone)
-Small, tasteful — not a circus.
-
-- **Magnetic cursor**: existing dot grows + snaps to interactive elements on hover.
-- **Hover-distort text** on hero name (letters jitter slightly on mouseover).
-- **Konami-code easter egg**: triggers a confetti + temporarily flips the site to a "brutalist" theme until you press Esc.
-- **Scramble-text effect** on stat counters and section headings on reveal.
-- **Cursor trail** of faint dots that fade — toggleable via a `~` keyboard shortcut.
-- **Reduced-motion**: all of the above disabled when `prefers-reduced-motion`.
-
----
-
-## Technical Section
-
-**Stack additions:** Lovable Cloud (Postgres + Auth + Edge Functions + AI Gateway + Emails), `react-helmet-async`, `react-markdown` (chat), `canvas-confetti` (easter egg).
-
-**Tables (all in `public`, RLS on, grants included):**
-- `contact_messages` — id, name, email, subject, message, created_at, ip_hash
-- `guestbook_entries` — id, user_id (auth.users), display_name, message, created_at, hidden (bool)
-- `page_views` — id, path, referrer, country, ip_hash, created_at
-- `user_roles` + `app_role` enum + `has_role()` security definer (per project rule) for `/admin`
-
-**Edge functions:** `send-contact`, `ask-naman` (streaming), `track-pageview`, `og-image` (optional; can pre-render statically instead).
-
-**Routing:** HashRouter stays. New routes: `#/guestbook`, `#/admin`. Floating Ask-Naman is global.
-
-**Build/Deploy:** unchanged — still static `dist/` to GitHub Pages. Edge functions live on Lovable Cloud; the static site calls them via HTTPS. The repo on GitHub stays as-is.
-
----
-
-## Suggested build order
-1. Enable Lovable Cloud
-2. Contact form (real email) — quick win, replaces mailto
-3. SEO + OG (helmet, sitemap, robots, OG images)
-4. Playful interactions layer
-5. Guestbook (needs Google auth)
-6. Ask Naman AI chat
-7. Analytics + `/admin` dashboard
-
-You can also pick a subset — just tell me which numbers to build and in what order.
+Want me to do all five sections, or pick a subset (e.g. just #1 knowledge + #3 UX)?
