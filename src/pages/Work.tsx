@@ -198,12 +198,14 @@ export default function Work() {
                     <li key={j}>— {b}</li>
                   ))}
                 </ul>
-                <a
-                  href={p.link}
+                <button
+                  type="button"
+                  onClick={() => setDemoOpen(true)}
                   className="mt-5 inline-block nav-link text-sm font-light"
                 >
                   Demo →
-                </a>
+                </button>
+
               </Card>
             </Reveal>
           ))}
