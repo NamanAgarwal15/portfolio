@@ -65,6 +65,12 @@ export default function Home() {
         >
           View My Work
         </Link>
+        <Link
+          to="/about"
+          className="border border-[#1A1A1A] px-6 py-3 text-sm font-medium hover:bg-[#1A1A1A] hover:text-[#F5F2EA] transition-colors duration-300"
+        >
+          About
+        </Link>
         <a
           href={`${import.meta.env.BASE_URL}Naman_Agarwal.pdf`}
           download="Naman_Agarwal.pdf"
