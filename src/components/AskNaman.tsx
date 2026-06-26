@@ -1,48 +1,109 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { MessageCircle, X, ArrowUp, Sparkles } from "lucide-react";
+import { MessageCircle, X, ArrowUp, RotateCcw, Copy, Check, Square } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import { toast } from "sonner";
+import Logo from "@/components/Logo";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
 const STARTERS = [
   "What's Naman's tech stack?",
   "Summarize his internship experience.",
-  "Why should I hire him?",
+  "Tell me about DriveSafe-IND.",
+];
+
+const FOLLOWUPS: { match: RegExp; suggest: string[] }[] = [
+  { match: /drivesafe|adas|yolo/i, suggest: ["What metrics did it hit?", "What was Naman's role on it?"] },
+  { match: /wildfire|robot|techsparx/i, suggest: ["What tech stack did the robot use?", "Tell me about his other projects."] },
+  { match: /winlytics|cricket|ipl/i, suggest: ["How accurate is the model?", "What features did he engineer?"] },
+  { match: /arista|data analyst|quadratic/i, suggest: ["What did he build at Arista Vault?", "Other internships?"] },
+  { match: /smart eye|iot|tinyml/i, suggest: ["What model did he optimize?", "Show me his projects."] },
+  { match: /skill|stack|python|tech/i, suggest: ["What has he built with it?", "How can I contact him?"] },
+  { match: /hire|contact|email|reach/i, suggest: ["What roles is he open to?", "Show me his best project."] },
 ];
 
 const FN_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ask-naman`;
 const ANON = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+const LS_KEY = "an_chat_v2";
 
-function getSessionId() {
+function newSid() {
+  try { return crypto.randomUUID(); } catch { return `s_${Date.now()}`; }
+}
+
+function loadSaved(): { sid: string; messages: Msg[] } {
+  if (typeof window === "undefined") return { sid: "anon", messages: [] };
   try {
-    let s = sessionStorage.getItem("an_sid");
-    if (!s) { s = crypto.randomUUID(); sessionStorage.setItem("an_sid", s); }
-    return s;
-  } catch { return "anon"; }
+    const raw = sessionStorage.getItem(LS_KEY);
+    if (raw) {
+      const p = JSON.parse(raw);
+      if (p && typeof p.sid === "string" && Array.isArray(p.messages)) return p;
+    }
+  } catch { /* ignore */ }
+  return { sid: newSid(), messages: [] };
+}
+
+function suggestionsFor(lastAssistant: string, lastUser: string): string[] {
+  const text = `${lastUser} ${lastAssistant}`;
+  for (const f of FOLLOWUPS) if (f.match.test(text)) return f.suggest;
+  return ["What are his strongest skills?", "How can I contact him?"];
 }
 
 export default function AskNaman() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Msg[]>([]);
+  const initial = useRef(loadSaved());
+  const [messages, setMessages] = useState<Msg[]>(initial.current.messages);
+  const [sid, setSid] = useState(initial.current.sid);
   const [input, setInput] = useState("");
   const [streaming, setStreaming] = useState(false);
+  const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const sessionIdRef = useRef<string>(typeof window !== "undefined" ? getSessionId() : "anon");
+  const taRef = useRef<HTMLTextAreaElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
 
+  useEffect(() => {
+    try { sessionStorage.setItem(LS_KEY, JSON.stringify({ sid, messages })); } catch { /* ignore */ }
+  }, [sid, messages]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, streaming]);
 
+  // Auto-grow textarea
+  useEffect(() => {
+    const el = taRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${Math.min(el.scrollHeight, 120)}px`;
+  }, [input]);
+
+  function resetChat() {
+    abortRef.current?.abort();
+    setMessages([]);
+    setSid(newSid());
+    setInput("");
+    try { sessionStorage.removeItem(LS_KEY); } catch { /* ignore */ }
+  }
+
+  function stop() {
+    abortRef.current?.abort();
+  }
+
   async function send(text: string) {
     const trimmed = text.trim();
     if (!trimmed || streaming) return;
+    if (trimmed.length > 1000) {
+      toast.error("Keep messages under 1000 characters.");
+      return;
+    }
     const newMessages: Msg[] = [...messages, { role: "user", content: trimmed }];
     setMessages(newMessages);
     setInput("");
     setStreaming(true);
     setMessages((m) => [...m, { role: "assistant", content: "" }]);
+
+    const ctrl = new AbortController();
+    abortRef.current = ctrl;
 
     try {
       const res = await fetch(FN_URL, {
@@ -52,13 +113,16 @@ export default function AskNaman() {
           Authorization: `Bearer ${ANON}`,
           apikey: ANON,
         },
-        body: JSON.stringify({ messages: newMessages, sessionId: sessionIdRef.current }),
+        body: JSON.stringify({ messages: newMessages, sessionId: sid }),
+        signal: ctrl.signal,
       });
       if (!res.ok || !res.body) {
         const j = await res.json().catch(() => ({}));
+        const msg = j.error || "Something went wrong.";
+        toast.error(msg);
         setMessages((m) => {
           const copy = [...m];
-          copy[copy.length - 1] = { role: "assistant", content: `⚠️ ${j.error || "Something went wrong."}` };
+          copy[copy.length - 1] = { role: "assistant", content: `⚠️ ${msg}` };
           return copy;
         });
         return;
@@ -74,9 +138,9 @@ export default function AskNaman() {
         const lines = buffer.split("\n");
         buffer = lines.pop() || "";
         for (const line of lines) {
-          const trimmed = line.trim();
-          if (!trimmed.startsWith("data:")) continue;
-          const payload = trimmed.slice(5).trim();
+          const t = line.trim();
+          if (!t.startsWith("data:")) continue;
+          const payload = t.slice(5).trim();
           if (payload === "[DONE]") continue;
           try {
             const json = JSON.parse(payload);
@@ -89,19 +153,45 @@ export default function AskNaman() {
                 return copy;
               });
             }
-          } catch {/* skip */}
+          } catch { /* skip */ }
         }
       }
-    } catch (e) {
-      setMessages((m) => {
-        const copy = [...m];
-        copy[copy.length - 1] = { role: "assistant", content: "⚠️ Network error." };
-        return copy;
-      });
+    } catch (e: any) {
+      if (e?.name === "AbortError") {
+        setMessages((m) => {
+          const copy = [...m];
+          const last = copy[copy.length - 1];
+          if (last?.role === "assistant" && !last.content) copy.pop();
+          else if (last?.role === "assistant") copy[copy.length - 1] = { ...last, content: last.content + "\n\n_(stopped)_" };
+          return copy;
+        });
+      } else {
+        toast.error("Network error.");
+        setMessages((m) => {
+          const copy = [...m];
+          copy[copy.length - 1] = { role: "assistant", content: "⚠️ Network error." };
+          return copy;
+        });
+      }
     } finally {
       setStreaming(false);
+      abortRef.current = null;
+      requestAnimationFrame(() => taRef.current?.focus());
     }
   }
+
+  function copyMsg(i: number, content: string) {
+    navigator.clipboard.writeText(content).then(() => {
+      setCopiedIdx(i);
+      setTimeout(() => setCopiedIdx(null), 1200);
+    });
+  }
+
+  const lastAssistant = [...messages].reverse().find((m) => m.role === "assistant" && m.content);
+  const lastUser = [...messages].reverse().find((m) => m.role === "user");
+  const showFollowups =
+    !streaming && messages.length > 0 && lastAssistant && lastUser && !lastAssistant.content.startsWith("⚠️");
+  const followups = showFollowups ? suggestionsFor(lastAssistant!.content, lastUser!.content) : [];
 
   return (
     <>
@@ -112,7 +202,7 @@ export default function AskNaman() {
         className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#1A1A1A] text-[#F5F2EA] rounded-full px-5 py-3 shadow-lg"
         aria-label="Ask Naman"
       >
-        {open ? <X size={18} /> : <Sparkles size={18} />}
+        {open ? <X size={18} /> : <Logo size={18} />}
         <span className="text-sm font-light">{open ? "Close" : "Ask Naman"}</span>
       </motion.button>
 
@@ -127,10 +217,22 @@ export default function AskNaman() {
           >
             <div className="px-4 py-3 border-b border-[#1A1A1A]/10 flex items-center gap-2">
               <MessageCircle size={16} />
-              <div>
+              <div className="flex-1 min-w-0">
                 <div className="text-sm font-medium">Ask Naman</div>
-                <div className="text-[10px] uppercase tracking-widest text-[#D97706]">AI · may be wrong</div>
+                <div className="text-[10px] uppercase tracking-widest text-[#D97706]">
+                  Trained on Naman's portfolio · may be wrong
+                </div>
               </div>
+              {messages.length > 0 && (
+                <button
+                  onClick={resetChat}
+                  className="p-1.5 text-[#666666] hover:text-[#1A1A1A] transition-colors"
+                  aria-label="Reset conversation"
+                  title="Reset conversation"
+                >
+                  <RotateCcw size={14} />
+                </button>
+              )}
             </div>
 
             <div ref={scrollRef} data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 space-y-3">
@@ -167,29 +269,74 @@ export default function AskNaman() {
                       m.content
                     )}
                   </div>
+                  {m.role === "assistant" && m.content && !m.content.startsWith("⚠️") && (
+                    <div className="mt-1">
+                      <button
+                        onClick={() => copyMsg(i, m.content)}
+                        className="text-[10px] uppercase tracking-widest text-[#888888] hover:text-[#1A1A1A] inline-flex items-center gap-1 transition-colors"
+                        aria-label="Copy reply"
+                      >
+                        {copiedIdx === i ? <Check size={10} /> : <Copy size={10} />}
+                        {copiedIdx === i ? "Copied" : "Copy"}
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
+              {followups.length > 0 && (
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {followups.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => send(s)}
+                      className="text-xs font-light border border-[#D97706]/60 text-[#1A1A1A] rounded-full px-3 py-1 hover:bg-[#D97706] hover:text-white transition-colors"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             <form
               onSubmit={(e) => { e.preventDefault(); send(input); }}
-              className="border-t border-[#1A1A1A]/10 p-3 flex items-center gap-2"
+              className="border-t border-[#1A1A1A]/10 p-3 flex items-end gap-2"
             >
-              <input
+              <textarea
+                ref={taRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask something…"
-                disabled={streaming}
-                className="flex-1 bg-transparent text-sm font-light focus:outline-none px-2 py-2 disabled:opacity-50"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    send(input);
+                  }
+                }}
+                placeholder="Ask something… (Shift+Enter for newline)"
+                rows={1}
+                maxLength={1000}
+                className="flex-1 bg-transparent text-sm font-light focus:outline-none px-2 py-2 resize-none max-h-[120px]"
               />
-              <button
-                type="submit"
-                disabled={streaming || !input.trim()}
-                className="bg-[#1A1A1A] text-[#F5F2EA] p-2 disabled:opacity-30"
-                aria-label="Send"
-              >
-                <ArrowUp size={16} />
-              </button>
+              {streaming ? (
+                <button
+                  type="button"
+                  onClick={stop}
+                  className="bg-[#1A1A1A] text-[#F5F2EA] p-2"
+                  aria-label="Stop"
+                  title="Stop"
+                >
+                  <Square size={14} fill="currentColor" />
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={!input.trim()}
+                  className="bg-[#1A1A1A] text-[#F5F2EA] p-2 disabled:opacity-30"
+                  aria-label="Send"
+                >
+                  <ArrowUp size={16} />
+                </button>
+              )}
             </form>
           </motion.div>
         )}
