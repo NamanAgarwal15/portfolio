@@ -177,7 +177,6 @@ export default function Work() {
                     <span
                       key={t}
                       className="border border-[#D97706]/60 rounded-full px-3 py-1 text-xs font-light"
-                      style={{ fontFamily: "'Courier New', Courier, monospace" }}
                     >
                       {t}
                     </span>
