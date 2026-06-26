@@ -199,14 +199,14 @@ export default function Contact() {
               href={r.href}
               target={r.href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              className="arrow-row flex items-center justify-between py-5 group"
+              className="arrow-row flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-3 py-4 sm:py-5 group min-h-[44px]"
             >
-              <span className="text-xs uppercase tracking-widest font-light text-[#666666]">
+              <span className="text-xs uppercase tracking-widest font-light text-[#666666] shrink-0">
                 {r.label}
               </span>
-              <span className="flex items-center gap-3">
-                <span className="font-light text-[#1A1A1A]">{r.value}</span>
-                <ArrowUpRight size={16} className="arrow text-[#666666]" />
+              <span className="flex items-center gap-3 min-w-0 max-w-full">
+                <span className="font-light text-[#1A1A1A] truncate min-w-0">{r.value}</span>
+                <ArrowUpRight size={16} className="arrow text-[#666666] shrink-0" />
               </span>
             </a>
           </motion.li>
