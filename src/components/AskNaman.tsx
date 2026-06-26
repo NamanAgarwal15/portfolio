@@ -197,7 +197,7 @@ export default function AskNaman() {
         onClick={() => setOpen((o) => !o)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#1A1A1A] text-[#F5F2EA] rounded-full px-5 py-3 shadow-lg"
+        className="fixed bottom-20 sm:bottom-6 right-4 sm:right-6 z-50 flex items-center gap-2 bg-[#1A1A1A] text-[#F5F2EA] rounded-full px-5 py-3 shadow-lg"
         aria-label="Ask Naman"
       >
         {open ? <X size={18} /> : <Logo size={18} />}
