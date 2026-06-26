@@ -74,11 +74,14 @@ export default function Home() {
         <a
           href={`${import.meta.env.BASE_URL}Naman_Agarwal.pdf`}
           download="Naman_Agarwal.pdf"
-          className="nav-link text-sm font-light"
+          className="border border-[#1A1A1A] px-6 py-3 text-sm font-medium hover:bg-[#1A1A1A] hover:text-[#F5F2EA] transition-colors duration-300"
         >
           Download Resume
         </a>
-        <Link to="/contact" className="nav-link text-sm font-light">
+        <Link
+          to="/contact"
+          className="border border-[#1A1A1A] px-6 py-3 text-sm font-medium hover:bg-[#1A1A1A] hover:text-[#F5F2EA] transition-colors duration-300"
+        >
           Get In Touch
         </Link>
       </motion.div>
