@@ -57,7 +57,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: name.length * 0.03 + 0.5, duration: 0.5 }}
-        className="mt-10 flex items-center gap-6 flex-wrap"
+        className="mt-10 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 sm:flex-wrap"
       >
         <Link
           to="/work"
