@@ -14,14 +14,12 @@ const STARTERS = [
 ];
 
 const FOLLOWUPS: { match: RegExp; suggest: string[] }[] = [
-  { match: /drivesafe|adas|yolo/i, suggest: ["What metrics did it hit?", "What was Naman's role on it?"] },
-  { match: /wildfire|robot|techsparx/i, suggest: ["What tech stack did the robot use?", "Tell me about his other projects."] },
-  { match: /winlytics|cricket|ipl/i, suggest: ["How accurate is the model?", "What features did he engineer?"] },
-  { match: /arista|data analyst|quadratic/i, suggest: ["What did he build at Arista Vault?", "Other internships?"] },
-  { match: /smart eye|iot|tinyml/i, suggest: ["What model did he optimize?", "Show me his projects."] },
-  { match: /skill|stack|python|tech/i, suggest: ["What has he built with it?", "How can I contact him?"] },
-  { match: /hire|contact|email|reach/i, suggest: ["What roles is he open to?", "Show me his best project."] },
+  { match: /drivesafe/i, suggest: ["How does DriveSafe work?", "What tech stack did you use?"] },
+  { match: /winlytics/i, suggest: ["How accurate is Winlytics?", "How did you scrape the data?"] },
+  { match: /arista|internship/i, suggest: ["What did you build at Arista?", "How can I contact Naman?"] },
+  { match: /skill|python/i, suggest: ["What projects use Python?", "What's Naman's strongest skill?"] },
 ];
+const DEFAULT_FOLLOWUPS = ["Tell me about DriveSafe", "How can I contact him?"];
 
 const FN_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ask-naman`;
 const ANON = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
@@ -46,7 +44,7 @@ function loadSaved(): { sid: string; messages: Msg[] } {
 function suggestionsFor(lastAssistant: string, lastUser: string): string[] {
   const text = `${lastUser} ${lastAssistant}`;
   for (const f of FOLLOWUPS) if (f.match.test(text)) return f.suggest;
-  return ["What are his strongest skills?", "How can I contact him?"];
+  return DEFAULT_FOLLOWUPS;
 }
 
 export default function AskNaman() {

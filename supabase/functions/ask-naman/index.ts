@@ -66,14 +66,14 @@ Deno.serve(async (req) => {
 
     const lastUser = [...messages].reverse().find((m: any) => m?.role === "user")?.content || "";
     if (typeof lastUser !== "string" || lastUser.length > 1000) {
-      return new Response(JSON.stringify({ error: "Your message is too long — keep it under 1000 characters." }), {
+      return new Response(JSON.stringify({ error: "That's a long one. Keep it under 1000 characters." }), {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
     if (rateLimited(sid)) {
       await logCall({ sessionId: sid, prompt: lastUser, response: "", count: messages.length, ua, referrer, error: "rate_limited" });
-      return new Response(JSON.stringify({ error: "Slow down — you've hit the chat limit. Try again in a few minutes." }), {
+      return new Response(JSON.stringify({ error: "Too many questions — Naman's AI needs a breather. Try again in a few minutes." }), {
         status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
