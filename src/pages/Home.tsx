@@ -91,16 +91,32 @@ export default function Home() {
       >
         <div className="h-px bg-[#1A1A1A]/15 w-full" />
         <div className="mt-10 grid grid-cols-3 gap-6">
-          {STATS.map((s) => (
-            <div key={s.label} data-companion={s.quip}>
-              <div className="text-3xl sm:text-5xl font-light tracking-tight text-[#1A1A1A]">
-                <Counter to={s.value} decimals={s.decimals} />
+          {STATS.map((s) => {
+            const inner = (
+              <>
+                <div className="text-3xl sm:text-5xl font-light tracking-tight text-[#1A1A1A]">
+                  <Counter to={s.value} decimals={s.decimals} />
+                </div>
+                <div className="mt-2 text-xs uppercase tracking-widest text-[#888888] font-light">
+                  {s.label}
+                </div>
+              </>
+            );
+            return s.to ? (
+              <Link
+                key={s.label}
+                to={s.to}
+                data-companion={s.quip}
+                className="block group transition-opacity hover:opacity-80"
+              >
+                {inner}
+              </Link>
+            ) : (
+              <div key={s.label} data-companion={s.quip}>
+                {inner}
               </div>
-              <div className="mt-2 text-xs uppercase tracking-widest text-[#888888] font-light">
-                {s.label}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </motion.div>
     </section>
