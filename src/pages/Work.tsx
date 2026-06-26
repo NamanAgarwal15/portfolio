@@ -7,6 +7,7 @@ const experience = [
     org: "Arista Vault",
     when: "Jun 2025 – Aug 2025",
     where: "Delhi",
+    quip: "Tracked 10 lakh+ campaigns in real time. Yes, lakh. He thinks in Indian number formats now.",
     bullets: [
       "Developed an automated marketing analytics dashboard using Python and Quadratic Sheets to track 10L+ campaigns in real time.",
       "Performed EDA to analyze customer journeys linking marketing efforts to sales outcomes, enabling funnel visibility and identifying high-performing segments and ROAS trends.",
@@ -17,6 +18,7 @@ const experience = [
     org: "Smart Eye",
     when: "Jan 2025 – Apr 2025",
     where: "Gurgaon",
+    quip: "Squeezed a deep learning model onto a Raspberry Pi and kept 80% accuracy. Tiny computer, not-tiny achievement.",
     bullets: [
       "Optimized DL models for embedded IoT systems using quantization, retaining over 80% accuracy.",
       "Evaluated TinyML deployment options with low-power MCUs like Raspberry Pi.",
@@ -28,6 +30,7 @@ const experience = [
     org: "Talent Carve",
     when: "Jun 2024 – Sep 2024",
     where: "Remote",
+    quip: "Helped launch an ebook called The Gentleman's Code. No, he did not write it. Yes, he did proofread it three times.",
     bullets: [
       "Contributed to development and execution of social media strategies across multiple platforms.",
       "Designed comprehensive content calendars to streamline posting schedules.",
@@ -40,6 +43,7 @@ const experience = [
     org: "Agaamin Technologies",
     when: "Jun 2024 – Aug 2024",
     where: "Remote",
+    quip: "Built wireframes in Figma for a full redesign. First time he realised designers and developers are the same person at a startup.",
     bullets: [
       "Interned on the front-end team for the Agaamin Redesign Project, focusing on UI/UX enhancement.",
       "Created detailed wireframes to guide the redesign process using a user-centered approach.",
@@ -54,6 +58,7 @@ const projects = [
     subtitle: "Multi-Modal ADAS",
     when: "Mar 2026 – May 2026",
     tags: ["PyTorch", "YOLO11m", "Dlib", "MiDaS", "OpenCV"],
+    quip: "141K+ images. 11 classes. 1 sleep-deprived developer. mAP went from 0.157 to 0.648 — that's not luck, that's curriculum learning.",
     bullets: [
       "Fine-tuned YOLO11m on 141K+ images via two-stage curriculum learning achieving mAP@0.5 of 0.648 across an 11-class taxonomy including India-exclusive classes absent from Western datasets.",
       "Engineered a camera-only driver monitoring pipeline using dlib 68-point facial landmarks.",
@@ -66,6 +71,7 @@ const projects = [
     subtitle: "Cricket Prediction",
     when: "Jan 2025 – May 2025",
     tags: ["Python", "NumPy", "pandas", "scikit-learn", "Matplotlib"],
+    quip: "Scraped 1,000+ IPL matches. Engineered 30+ features. Still can't predict why Mumbai Indians collapse in playoffs.",
     bullets: [
       "Trained multiple ML models to predict IPL match outcomes with 65%+ accuracy using structured IPL data.",
       "Scraped 1,000+ match records from ESPNcricinfo and Cricbuzz using custom web scraping scripts.",

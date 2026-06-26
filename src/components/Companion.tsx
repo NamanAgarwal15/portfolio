@@ -1,92 +1,73 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 
-type Tip = { text: string; cta?: { label: string; to: string } };
+type Tip = { text: string };
 
 const ROUTE_TIPS: Record<string, Tip[]> = {
   "/": [
-    { text: "Pssst — there's a party button down there. Nine games and questionable life choices.", cta: { label: "Arcade", to: "/arcade?party=1" } },
-    { text: "Scroll for stats, a brainteaser, and an unbeatable RPS. I bet against you, FYI." },
-    { text: "Resume's one click away. No login, no newsletter, I promise." },
-    { text: "Fun fact: 73% of stats are made up. This one isn't." },
-    { text: "If you're a recruiter — hi. If you're not — also hi." },
-    { text: "The big N up top isn't just a logo. Okay, it kinda is." },
+    { text: "Trained a computer vision model on 141K+ images. Your Netflix history has more data, but less purpose." },
+    { text: "CGPA: 7.93. Not a 10, but neither is anyone who's actually shipped something." },
+    { text: "4 internships before final year. Overachiever? Maybe. Unemployed? Not yet." },
+    { text: "Scroll down. The stats get better. Or at least more specific." },
+    { text: "Built an ADAS system for Indian roads. Yes, including the cows. Especially the cows." },
+    { text: "→ Head to Work to see what he's actually built." },
+    { text: "→ Hit Contact if you've seen enough. He doesn't bite." },
   ],
   "/about": [
-    { text: "Skim the skills. Or don't — I'm a pixel, not a cop." },
-    { text: "Naman drinks more chai than coffee. Important context." },
-    { text: "He says 'production-ready'. He means it. Probably." },
+    { text: "Java and Python. One for interviews, one for everything else." },
+    { text: "Specialises in Data Science and AI. Also in pretending he understands all of linear algebra." },
+    { text: "First Runner-Up at TechSparx out of 80+ teams. The winner probably Googled more." },
+    { text: "Co-Chair of Innovation Vertical. Mostly innovated ways to make meetings shorter." },
+    { text: "→ Seen enough about him? Check out his actual work — hit Work in the nav." },
+    { text: "→ Impressed? Confused? Either way, Contact is right there." },
   ],
   "/work": [
-    { text: "Naman got a bit distracted building this portfolio. More projects on the way — meanwhile, fancy a game?", cta: { label: "Arcade", to: "/arcade?party=1" } },
-    { text: "Two shipped, more in the oven. Until they're done — arcade?", cta: { label: "Arcade", to: "/arcade" } },
-    { text: "Projects load, attention spans don't. Quick game?", cta: { label: "Arcade", to: "/arcade?party=1" } },
-  ],
-  "/guestbook": [
-    { text: "Be nice. The CAPTCHA is watching. So am I." },
-    { text: "Drop a line. Even 'hi' counts. Especially 'hi'." },
+    { text: "DriveSafe-IND detects auto-rickshaws, animals, and chaos — basically trained on Indian roads." },
+    { text: "mAP went from 0.157 to 0.648. That's a 312% improvement. His sleep went down 312%." },
+    { text: "Built a marketing dashboard tracking 10L+ campaigns. Yes, lakhs. He's bilingual in number formats." },
+    { text: "Winlytics predicts IPL outcomes at 65%+ accuracy. Still better than your fantasy team picks." },
+    { text: "Sensor fusion on Raspberry Pi. Tiny computer, big feelings." },
+    { text: "→ Like what you see? Don't just stare — hit Contact and say something." },
   ],
   "/contact": [
-    { text: "Real form, real inbox. Bots get bounced." },
-    { text: "Form locks after sending — that's a feature, not a bug." },
-  ],
-  "/arcade": [
-    { text: "F1 lights = pure reflex. Cricket = timing. RPS = rigged." },
-    { text: "Try the unbeatable RPS. Tell me when you win — you won't." },
-    { text: "Sudoku has 4, 6, and 8 sizes. 8×8 is humbling." },
-  ],
-  "/stats": [
-    { text: "Spy mode. Don't tell anyone." },
+    { text: "You've made it this far. The form takes 30 seconds. Less time than this bubble." },
+    { text: "He responds fast. Faster than his model inference times, even." },
+    { text: "No cover letter needed. Just say hi. Naman's people." },
+    { text: "LinkedIn, GitHub, email, phone — pick your weapon." },
+    { text: "Seriously. Just send it. The worst he can say is he's already placed. He's not." },
   ],
 };
-
-const HOVER_QUIPS = [
-  "Ooh, that one. Good taste.",
-  "I see you eyeing this.",
-  "Click it. I dare you.",
-  "Hovering is half of decision-making.",
-  "Yep, that's a button. Works like a button.",
-];
 
 const FALLBACK: Tip[] = [{ text: "I'm your tiny tour guide. Carry on." }];
 
 export default function Companion() {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const [dismissed, setDismissed] = useState(false);
   const [tip, setTip] = useState<Tip>(FALLBACK[0]);
-  const usedRef = useRef<Set<string>>(new Set());
+  const idxRef = useRef(0);
   const hoverTimer = useRef<number | null>(null);
 
   const pool = useMemo(() => ROUTE_TIPS[pathname] ?? FALLBACK, [pathname]);
 
-  // Pick a non-repeating tip from the current pool.
-  const pickNext = () => {
-    const available = pool.filter((t) => !usedRef.current.has(t.text));
-    const choice = (available.length ? available : pool)[Math.floor(Math.random() * (available.length || pool.length))];
-    if (!available.length) usedRef.current.clear();
-    usedRef.current.add(choice.text);
-    setTip(choice);
-  };
-
   // Reset on route change and pick first tip.
   useEffect(() => {
-    usedRef.current = new Set();
+    idxRef.current = 0;
     setOpen(true);
-    pickNext();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname]);
+    setTip(pool[0]);
+  }, [pathname, pool]);
 
-  // Auto-rotate every 6-10s
+  // Auto-rotate every 8s, sequentially through the pool.
   useEffect(() => {
     if (!open) return;
-    const id = window.setInterval(pickNext, 6500 + Math.random() * 3500);
+    const id = window.setInterval(() => {
+      idxRef.current = (idxRef.current + 1) % pool.length;
+      setTip(pool[idxRef.current]);
+    }, 8000);
     return () => window.clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, pathname]);
+  }, [open, pool]);
 
   // Hover-listener: any element with [data-companion] for 900ms shows its comment.
   useEffect(() => {
@@ -95,8 +76,8 @@ export default function Companion() {
       if (!el) return;
       if (hoverTimer.current) window.clearTimeout(hoverTimer.current);
       hoverTimer.current = window.setTimeout(() => {
-        const custom = el.getAttribute("data-companion") || "";
-        const text = custom && custom !== "auto" ? custom : HOVER_QUIPS[Math.floor(Math.random() * HOVER_QUIPS.length)];
+        const text = el.getAttribute("data-companion") || "";
+        if (!text) return;
         setOpen(true);
         setTip({ text });
       }, 900);
@@ -111,25 +92,12 @@ export default function Companion() {
     };
   }, []);
 
-  // Special: on /work, after 1.2s nudge to arcade automatically.
-  useEffect(() => {
-    if (pathname !== "/work") return;
-    const id = window.setTimeout(() => {
-      setOpen(true);
-      setTip({
-        text: "Naman got a bit distracted building this portfolio — more work coming soon. Meanwhile, let's party 🪩",
-        cta: { label: "Go to Arcade", to: "/arcade?party=1" },
-      });
-    }, 1400);
-    return () => window.clearTimeout(id);
-  }, [pathname]);
-
   if (dismissed) return null;
 
   return (
     <div className="fixed bottom-6 left-6 z-40 flex items-end gap-2 pointer-events-none">
       <motion.button
-        onClick={() => { setOpen((o) => !o); pickNext(); }}
+        onClick={() => setOpen((o) => !o)}
         whileHover={{ scale: 1.08, rotate: -4 }}
         whileTap={{ scale: 0.95 }}
         animate={{ y: [0, -4, 0] }}
@@ -158,14 +126,6 @@ export default function Companion() {
               <X size={10} />
             </button>
             <p className="leading-relaxed">{tip.text}</p>
-            {tip.cta && (
-              <button
-                onClick={() => navigate(tip.cta!.to)}
-                className="mt-1 inline-block text-[10px] uppercase tracking-widest underline"
-              >
-                {tip.cta.label} →
-              </button>
-            )}
           </motion.div>
         )}
       </AnimatePresence>
