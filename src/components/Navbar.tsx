@@ -36,7 +36,7 @@ export default function Navbar() {
         </ul>
 
         <button
-          className="md:hidden text-[#1A1A1A]"
+          className="md:hidden text-[#1A1A1A] min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2"
           onClick={() => setOpen(true)}
           aria-label="Open menu"
         >
