@@ -116,7 +116,7 @@ export default function Companion() {
             animate={{ opacity: 1, x: 0, y: 0 }}
             exit={{ opacity: 0, x: -8 }}
             transition={{ duration: 0.3 }}
-            className="pointer-events-auto relative mb-1 max-w-[280px] bg-white border border-[#1A1A1A]/15 px-3 py-2 text-xs font-light text-[#1A1A1A] shadow-md"
+            className="pointer-events-auto relative mb-1 max-w-[85vw] sm:max-w-[280px] bg-white border border-[#1A1A1A]/15 px-3 py-2 text-xs font-light text-[#1A1A1A] shadow-md"
           >
             <button
               onClick={() => setDismissed(true)}
