@@ -100,18 +100,15 @@ html.brutalist a, html.brutalist button {
   .blink-dot { animation: none; }
 }
 
-/* Glassmorphic depth stage */
+/* Glassmorphic depth stage — perf-tuned: avoid backdrop-blur over animated blobs */
 .glass-card {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 253, 248, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.6) inset,
     0 20px 50px -20px rgba(26, 26, 26, 0.18),
     0 8px 24px -12px rgba(26, 26, 26, 0.12);
   transition: box-shadow 0.4s ease, transform 0.4s ease;
-  will-change: transform;
 }
 .glass-card:hover {
   box-shadow:
@@ -119,32 +116,46 @@ html.brutalist a, html.brutalist button {
     0 24px 60px -18px rgba(217, 119, 6, 0.28),
     0 10px 30px -10px rgba(217, 119, 6, 0.18);
 }
-.depth-stage { perspective: 1200px; transform-style: preserve-3d; }
+/* Only apply real backdrop-blur on large screens & non-reduced-motion */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .glass-card {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px) saturate(135%);
+    -webkit-backdrop-filter: blur(10px) saturate(135%);
+  }
+}
+.depth-stage { perspective: 1200px; }
 .tilt-3d { transform-style: preserve-3d; transition: transform 0.25s ease-out; }
 
 .gradient-blob {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(80px);
-  opacity: 0.55;
+  filter: blur(70px);
+  opacity: 0.5;
   pointer-events: none;
   will-change: transform;
+  transform: translateZ(0);
 }
 @keyframes blob-drift-a {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(60px, -40px, 0) scale(1.08); }
+  50%      { transform: translate3d(50px, -30px, 0) scale(1.05); }
 }
 @keyframes blob-drift-b {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(-50px, 50px, 0) scale(1.12); }
+  50%      { transform: translate3d(-40px, 40px, 0) scale(1.08); }
 }
 @keyframes blob-drift-c {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(40px, 30px, 0) scale(0.95); }
+  50%      { transform: translate3d(30px, 25px, 0) scale(0.96); }
 }
-.blob-a { animation: blob-drift-a 18s ease-in-out infinite; }
-.blob-b { animation: blob-drift-b 22s ease-in-out infinite; }
-.blob-c { animation: blob-drift-c 26s ease-in-out infinite; }
+.blob-a { animation: blob-drift-a 32s ease-in-out infinite; }
+.blob-b { animation: blob-drift-b 38s ease-in-out infinite; }
+.blob-c { animation: blob-drift-c 44s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
   .blob-a, .blob-b, .blob-c { animation: none; }
+}
+/* Mobile/tablet: kill blob animation (paint-bound on phones) */
+@media (max-width: 1023px) {
+  .blob-a, .blob-b, .blob-c { animation: none; }
+  .gradient-blob { opacity: 0.35; filter: blur(50px); }
 }
