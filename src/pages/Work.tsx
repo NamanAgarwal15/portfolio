@@ -117,14 +117,6 @@ const projects = [
   },
 ];
 
-function Card({ children, companion }: { children: React.ReactNode; companion?: string }) {
-  return (
-    <div data-companion={companion} className="border border-[#1A1A1A]/15 p-6 sm:p-8 bg-white transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.15)]">
-      {children}
-    </div>
-  );
-}
-
 export default function Work() {
   const [demoOpen, setDemoOpen] = useState(false);
 
@@ -137,18 +129,18 @@ export default function Work() {
 
       <div className="mt-16">
         <Reveal>
-          <h3 className="text-xs uppercase tracking-widest text-[#666666] font-medium">
+          <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold">
             Experience
           </h3>
         </Reveal>
-        <div className="mt-8 space-y-6">
+        <ul className="mt-8 divide-y divide-[#1A1A1A]/10">
           {experience.map((e, i) => (
             <Reveal key={i} delay={i * 0.05}>
-              <Card companion={e.quip}>
+              <li className="py-8" data-companion={e.quip}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <div className="font-medium text-lg">{e.org}</div>
-                    <div className="text-sm font-light text-[#666666]">{e.role}</div>
+                    <div className="text-sm font-light text-[#666666] mt-1">{e.role}</div>
                   </div>
                   <div className="text-xs font-light text-[#666666]">
                     {e.when} · {e.where}
@@ -159,26 +151,29 @@ export default function Work() {
                     <li key={j}>— {b}</li>
                   ))}
                 </ul>
-              </Card>
+              </li>
             </Reveal>
           ))}
-        </div>
+        </ul>
       </div>
 
       <div className="mt-20">
         <Reveal>
-          <h3 className="text-xs uppercase tracking-widest text-[#666666] font-medium">
+          <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold">
             Projects
           </h3>
         </Reveal>
-        <div className="mt-8 space-y-6">
+        <ul className="mt-8 divide-y divide-[#1A1A1A]/10">
           {projects.map((p, i) => (
             <Reveal key={i} delay={i * 0.05}>
-              <Card companion={p.quip}>
+              <li className="py-8" data-companion={p.quip}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <div className="font-medium text-lg">
-                      {p.name} <span className="text-[#666666] font-light">— {p.subtitle}</span>
+                      {p.name}
+                      {p.subtitle && (
+                        <span className="text-[#666666] font-light"> — {p.subtitle}</span>
+                      )}
                     </div>
                   </div>
                   <div className="text-xs font-light text-[#666666]">{p.when}</div>
@@ -205,19 +200,18 @@ export default function Work() {
                 >
                   Demo →
                 </button>
-
-              </Card>
+              </li>
             </Reveal>
           ))}
-        </div>
+        </ul>
       </div>
 
       <Dialog open={demoOpen} onOpenChange={setDemoOpen}>
-        <DialogContent>
+        <DialogContent className="bg-[#F5F2EA] border border-[#1A1A1A]/15 shadow-2xl">
           <DialogHeader>
-            <DialogTitle>Live demo coming soon</DialogTitle>
-            <DialogDescription>
-              Download my resume for the demo — it has the writeup, results, and links in one place.
+            <DialogTitle className="text-[#1A1A1A]">Live demo coming soon</DialogTitle>
+            <DialogDescription className="text-[#1A1A1A]/75">
+              The hosted demo isn't live yet. Grab my resume — it has the full writeup, results, and links in one place.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="sm:justify-start gap-2">
