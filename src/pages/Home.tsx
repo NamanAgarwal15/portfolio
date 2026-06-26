@@ -38,6 +38,7 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: name.length * 0.03 + 0.1, duration: 0.5 }}
         className="mt-6 text-lg sm:text-xl font-light text-[#666666]"
+
       >
         Data Science & AI · BML Munjal University '27
       </motion.p>

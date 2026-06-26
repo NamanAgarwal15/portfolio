@@ -81,7 +81,6 @@ export default function About() {
                         show: { opacity: 1, y: 0 },
                       }}
                       className="border border-[#D97706]/60 rounded-full px-4 py-1.5 text-sm font-light text-[#1A1A1A]"
-                      style={{ fontFamily: "'Courier New', Courier, monospace" }}
                     >
                       {s}
                     </motion.span>
