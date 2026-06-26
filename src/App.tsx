@@ -13,7 +13,6 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Work from "./pages/Work";
 import Contact from "./pages/Contact";
-import Guestbook from "./pages/Guestbook";
 import Stats from "./pages/Stats";
 import Arcade from "./pages/Arcade";
 import { Toaster } from "@/components/ui/sonner";
@@ -35,7 +34,6 @@ function AnimatedRoutes() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/work" element={<Work />} />
-          <Route path="/guestbook" element={<Guestbook />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/arcade" element={<Arcade />} />
