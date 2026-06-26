@@ -15,10 +15,10 @@ export default function Arcade() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 8 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="border border-[#1A1A1A]/15 p-6 bg-white/40"
+        transition={{ duration: 0.4 }}
+        className="glass-card rounded-3xl p-6 sm:p-8"
       >
         <F1Lights />
       </motion.div>

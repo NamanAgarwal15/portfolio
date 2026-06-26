@@ -80,7 +80,7 @@ export default function Contact() {
       </Reveal>
 
       <Reveal delay={0.1}>
-        <form onSubmit={onSubmit} className="mt-14" noValidate>
+        <form onSubmit={onSubmit} className="mt-14 glass-card rounded-3xl p-6 sm:p-10" noValidate>
           <fieldset disabled={submitting || submitted} className="space-y-8 disabled:opacity-60 transition-opacity">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div>
@@ -186,20 +186,19 @@ export default function Contact() {
         </div>
       </Reveal>
 
-      <ul>
+      <ul className="glass-card rounded-3xl p-2 sm:p-4 divide-y divide-white/40">
         {rows.map((r, i) => (
           <motion.li
             key={r.label}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 + i * 0.08, duration: 0.45, ease: "easeOut" }}
-            className="border-b border-[#1A1A1A]/10"
           >
             <a
               href={r.href}
               target={r.href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
-              className="arrow-row flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-3 py-4 sm:py-5 group min-h-[44px]"
+              className="arrow-row flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-3 px-4 py-4 sm:py-5 group min-h-[44px] rounded-2xl hover:bg-white/30 transition-colors"
             >
               <span className="text-xs uppercase tracking-widest font-light text-[#666666] shrink-0">
                 {r.label}

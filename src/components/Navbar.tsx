@@ -14,7 +14,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 border-b border-[#D97706]/10" style={{ background: "rgba(245, 242, 234, 0.85)", backdropFilter: "blur(8px)" }}>
+    <header className="fixed top-0 left-0 right-0 z-40 border-b border-white/40" style={{ background: "rgba(255, 255, 255, 0.35)", backdropFilter: "blur(18px) saturate(140%)", WebkitBackdropFilter: "blur(18px) saturate(140%)", boxShadow: "0 8px 24px -16px rgba(26,26,26,0.15)" }}>
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 text-[#1A1A1A]" aria-label="Home">
           <Logo size={28} />
