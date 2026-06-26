@@ -92,6 +92,20 @@ const projects = [
     ],
     link: "#placeholder",
   },
+  {
+    name: "Smart Wildfire-Fighting Robot with RAS",
+    subtitle: "",
+    when: "Aug 2023 – Present",
+    tags: ["Arduino", "GSM", "Geolocation", "IoT", "Sensors"],
+    quip: "A robot that fights wildfires. Built with Arduino and a concerning amount of late nights. Second place at TechSparx out of 80+ teams — the robot deserved first.",
+    bullets: [
+      "Developed a wildfire-fighting robot with advanced sensors, geolocation, and GSM modules for precise tracking and remote communication in wildfire-prone areas.",
+      "Integrated a Remote Alerting System (RAS) enabling real-time monitoring and remote activation for rapid response to emerging fire threats.",
+      "Controlled via Arduino for autonomous operation in challenging environments; designed for cost-effective, scalable early wildfire detection.",
+      "Second place out of 80+ teams at TechSparx.I 2025, BMU.",
+    ],
+    link: "#placeholder",
+  },
 ];
 
 function Card({ children, companion }: { children: React.ReactNode; companion?: string }) {
