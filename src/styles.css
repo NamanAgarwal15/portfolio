@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #F7F5F2;
+  --color-bg: #F5F2EA;
   --color-ink: #1A1A1A;
-  --color-accent: #475569;
+  --color-accent: #D97706;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
 :root {
-  --background: #F7F5F2;
+  --background: #F5F2EA;
   --foreground: #1A1A1A;
-  --accent: #475569;
+  --accent: #D97706;
 }
 
 html, body {
@@ -21,7 +21,18 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-* { border-color: rgba(71, 85, 105, 0.15); }
+body {
+  background-color: #F5F2EA;
+  background-image: radial-gradient(circle, #B8C4A8 1px, transparent 1px);
+  background-size: 18px 18px;
+  background-attachment: fixed;
+}
+
+h1, h2, h3, .font-mono-display {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+* { border-color: rgba(217, 119, 6, 0.15); }
 
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
@@ -43,7 +54,7 @@ html.lenis, html.lenis body { height: auto; }
   bottom: 0;
   width: 100%;
   height: 1px;
-  background: #475569;
+  background: #D97706;
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s ease;
@@ -60,7 +71,7 @@ html.lenis, html.lenis body { height: auto; }
   transform: translateX(4px);
 }
 
-/* Konami easter egg: brutalist mode (press ↑↑↓↓←→←→ba, ESC to exit) */
+/* Konami easter egg: brutalist mode */
 html.brutalist body {
   background: #ffeb3b !important;
   color: #0a0a0a !important;
@@ -88,4 +99,3 @@ html.brutalist a, html.brutalist button {
 @media (prefers-reduced-motion: reduce) {
   .blink-dot { animation: none; }
 }
-

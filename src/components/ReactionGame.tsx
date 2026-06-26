@@ -54,9 +54,9 @@ export default function ReactionGame() {
     state === "go"
       ? "bg-[#1A1A1A] text-white"
       : state === "waiting"
-      ? "bg-[#475569]/15 text-[#475569]"
+      ? "bg-[#D97706]/15 text-[#D97706]"
       : state === "early"
-      ? "bg-[#475569]/10 text-[#1A1A1A]"
+      ? "bg-[#D97706]/10 text-[#1A1A1A]"
       : "bg-transparent text-[#1A1A1A]";
 
   const label =
@@ -72,7 +72,7 @@ export default function ReactionGame() {
 
   return (
     <div>
-      <div className="text-xs uppercase tracking-widest text-[#475569] font-light mb-3">
+      <div className="text-xs uppercase tracking-widest text-[#D97706] font-light mb-3">
         Reaction Test
       </div>
       <button
@@ -82,7 +82,7 @@ export default function ReactionGame() {
       >
         {label}
       </button>
-      <div className="mt-2 text-[10px] uppercase tracking-widest text-[#475569] font-light">
+      <div className="mt-2 text-[10px] uppercase tracking-widest text-[#D97706] font-light">
         Best {best !== null ? `${best} ms` : "—"}
       </div>
     </div>

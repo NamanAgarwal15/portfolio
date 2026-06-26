@@ -109,7 +109,7 @@ export default function AskNaman() {
         onClick={() => setOpen((o) => !o)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#1A1A1A] text-[#F7F5F2] rounded-full px-5 py-3 shadow-lg"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#1A1A1A] text-[#F5F2EA] rounded-full px-5 py-3 shadow-lg"
         aria-label="Ask Naman"
       >
         {open ? <X size={18} /> : <Sparkles size={18} />}
@@ -123,20 +123,20 @@ export default function AskNaman() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.96 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed bottom-24 right-6 z-50 w-[min(92vw,380px)] h-[min(70vh,560px)] bg-[#F7F5F2] border border-[#1A1A1A]/15 shadow-2xl flex flex-col"
+            className="fixed bottom-24 right-6 z-50 w-[min(92vw,380px)] h-[min(70vh,560px)] bg-[#F5F2EA] border border-[#1A1A1A]/15 shadow-2xl flex flex-col"
           >
             <div className="px-4 py-3 border-b border-[#1A1A1A]/10 flex items-center gap-2">
               <MessageCircle size={16} />
               <div>
                 <div className="text-sm font-medium">Ask Naman</div>
-                <div className="text-[10px] uppercase tracking-widest text-[#475569]">AI · may be wrong</div>
+                <div className="text-[10px] uppercase tracking-widest text-[#D97706]">AI · may be wrong</div>
               </div>
             </div>
 
             <div ref={scrollRef} data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 space-y-3">
               {messages.length === 0 && (
                 <div className="space-y-3">
-                  <p className="text-sm font-light text-[#475569]">
+                  <p className="text-sm font-light text-[#D97706]">
                     Hey! I'm an AI that knows Naman well. Ask me anything.
                   </p>
                   <div className="flex flex-col gap-2">
@@ -144,7 +144,7 @@ export default function AskNaman() {
                       <button
                         key={s}
                         onClick={() => send(s)}
-                        className="text-left text-sm font-light border border-[#1A1A1A]/15 px-3 py-2 hover:bg-[#1A1A1A] hover:text-[#F7F5F2] transition-colors"
+                        className="text-left text-sm font-light border border-[#1A1A1A]/15 px-3 py-2 hover:bg-[#1A1A1A] hover:text-[#F5F2EA] transition-colors"
                       >
                         {s}
                       </button>
@@ -157,7 +157,7 @@ export default function AskNaman() {
                   <div
                     className={`inline-block max-w-[85%] text-sm font-light leading-relaxed px-3 py-2 ${
                       m.role === "user"
-                        ? "bg-[#1A1A1A] text-[#F7F5F2]"
+                        ? "bg-[#1A1A1A] text-[#F5F2EA]"
                         : "bg-white border border-[#1A1A1A]/10 prose prose-sm"
                     }`}
                   >
@@ -185,7 +185,7 @@ export default function AskNaman() {
               <button
                 type="submit"
                 disabled={streaming || !input.trim()}
-                className="bg-[#1A1A1A] text-[#F7F5F2] p-2 disabled:opacity-30"
+                className="bg-[#1A1A1A] text-[#F5F2EA] p-2 disabled:opacity-30"
                 aria-label="Send"
               >
                 <ArrowUp size={16} />

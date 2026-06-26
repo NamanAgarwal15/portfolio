@@ -7,9 +7,9 @@ export default function Arcade() {
     <section className="max-w-3xl mx-auto px-6 py-10">
       <SEO title="F1 Reaction Test" description="Test your F1 reflexes — lights out and away we go." path="/arcade" />
       <div className="mb-8">
-        <div className="text-[10px] uppercase tracking-widest text-[#475569] font-light">Arcade</div>
+        <div className="text-[10px] uppercase tracking-widest text-[#D97706] font-light">Arcade</div>
         <h1 className="text-4xl sm:text-5xl font-light tracking-tight mt-2">F1 Reaction Test</h1>
-        <p className="mt-3 text-sm font-light text-[#475569] max-w-xl">
+        <p className="mt-3 text-sm font-light text-[#D97706] max-w-xl">
           How fast are your reflexes? Lights out and away we go.
         </p>
       </div>

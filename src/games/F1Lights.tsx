@@ -63,7 +63,7 @@ export default function F1Lights() {
       >
         {label}
       </button>
-      <div className="mt-2 text-[10px] uppercase tracking-widest text-[#475569]">
+      <div className="mt-2 text-[10px] uppercase tracking-widest text-[#D97706]">
         F1 Start Lights · Best {best ? `${best} ms` : "—"}
       </div>
     </div>

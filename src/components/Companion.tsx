@@ -102,7 +102,7 @@ export default function Companion() {
         whileTap={{ scale: 0.95 }}
         animate={{ y: [0, -4, 0] }}
         transition={{ y: { repeat: Infinity, duration: 2.5, ease: "easeInOut" } }}
-        className="pointer-events-auto w-12 h-12 rounded-full bg-[#1A1A1A] text-[#F7F5F2] flex items-center justify-center shadow-lg text-xl select-none"
+        className="pointer-events-auto w-12 h-12 rounded-full bg-[#1A1A1A] text-[#F5F2EA] flex items-center justify-center shadow-lg text-xl select-none"
         aria-label="Companion"
         title="Your tiny guide"
       >
@@ -120,7 +120,7 @@ export default function Companion() {
           >
             <button
               onClick={() => setDismissed(true)}
-              className="absolute -top-2 -right-2 w-5 h-5 bg-[#1A1A1A] text-[#F7F5F2] flex items-center justify-center rounded-full"
+              className="absolute -top-2 -right-2 w-5 h-5 bg-[#1A1A1A] text-[#F5F2EA] flex items-center justify-center rounded-full"
               aria-label="Dismiss"
             >
               <X size={10} />

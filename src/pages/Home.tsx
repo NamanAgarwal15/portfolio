@@ -15,6 +15,9 @@ export default function Home() {
   return (
     <section className="max-w-5xl mx-auto px-6 min-h-[calc(100vh-5rem)] flex flex-col justify-center">
       <SEO title="Home" description="Naman Agarwal — Computer Science & AI undergraduate at BML Munjal University. Internships, projects, and an AI assistant." path="/" />
+      <div style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: "13px", color: "#D97706", opacity: 0.8 }} className="mb-4">
+        // cs undergrad · data science & ai · builder
+      </div>
       <h1 className="text-5xl sm:text-7xl md:text-8xl font-light tracking-tight leading-[1.05]">
         {name.split("").map((c, i) => (
           <motion.span
@@ -34,7 +37,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: name.length * 0.03 + 0.1, duration: 0.5 }}
-        className="mt-6 text-lg sm:text-xl font-light text-[#475569]"
+        className="mt-6 text-lg sm:text-xl font-light text-[#D97706]"
       >
         Data Science & AI · BML Munjal University '27
       </motion.p>
@@ -57,7 +60,7 @@ export default function Home() {
       >
         <Link
           to="/work"
-          className="border border-[#1A1A1A] px-6 py-3 text-sm font-medium hover:bg-[#1A1A1A] hover:text-[#F7F5F2] transition-colors duration-300"
+          className="border border-[#1A1A1A] px-6 py-3 text-sm font-medium hover:bg-[#1A1A1A] hover:text-[#F5F2EA] transition-colors duration-300"
         >
           View My Work
         </Link>
@@ -79,14 +82,14 @@ export default function Home() {
         transition={{ delay: name.length * 0.03 + 0.7, duration: 0.5 }}
         className="mt-20 mb-24"
       >
-        <div className="h-px bg-[#475569]/20 w-full" />
+        <div className="h-px bg-[#D97706]/20 w-full" />
         <div className="mt-10 grid grid-cols-3 gap-6">
           {STATS.map((s) => (
             <div key={s.label} data-companion={s.quip}>
               <div className="text-3xl sm:text-5xl font-light tracking-tight">
                 <Counter to={s.value} decimals={s.decimals} />
               </div>
-              <div className="mt-2 text-xs uppercase tracking-widest text-[#475569] font-light">
+              <div className="mt-2 text-xs uppercase tracking-widest text-[#D97706] font-light">
                 {s.label}
               </div>
             </div>

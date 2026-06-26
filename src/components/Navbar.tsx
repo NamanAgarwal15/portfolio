@@ -14,11 +14,11 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-md bg-white/60 border-b border-[#475569]/10">
+    <header className="fixed top-0 left-0 right-0 z-40 border-b border-[#D97706]/10" style={{ background: "rgba(245, 242, 234, 0.85)", backdropFilter: "blur(8px)" }}>
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 text-[#1A1A1A]" aria-label="Home">
           <Logo size={28} />
-          <span className="hidden sm:inline font-medium tracking-tight text-sm">Naman Agarwal</span>
+          <span className="hidden sm:inline font-medium tracking-tight text-sm" style={{ fontFamily: "'Courier New', Courier, monospace" }}>Naman Agarwal</span>
         </Link>
 
         <ul className="hidden md:flex items-center gap-8 text-sm font-light">
@@ -51,7 +51,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-50 bg-[#F7F5F2] flex flex-col"
+            className="fixed inset-0 z-50 bg-[#F5F2EA] flex flex-col"
           >
             <div className="flex justify-end p-6">
               <button onClick={() => setOpen(false)} aria-label="Close menu">
