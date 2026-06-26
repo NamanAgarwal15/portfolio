@@ -38,30 +38,30 @@ const achievements = [
 
 export default function About() {
   return (
-    <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+    <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20 space-y-10">
       <SEO fullTitle="About — Naman Agarwal | CSE Undergrad, BML Munjal University" title="About" description="About Naman Agarwal — CSE undergraduate at BML Munjal University, focused on Data Science, AI, and shipping real systems." path="/#/about" />
       <Reveal>
         <h2 className="text-3xl sm:text-4xl font-light tracking-tight">About</h2>
       </Reveal>
 
       <Reveal delay={0.05}>
-        <p className="mt-8 max-w-3xl text-base sm:text-lg font-light leading-relaxed text-[#1A1A1A]/85">
-          CSE undergrad at BML Munjal University, passionate about Technology, Innovation and
-          Entrepreneurship. I work where ML and DL meet the real world — turning data into
-          decisions that matter. New ideas captivate me and I build on them. Always open to
-          connecting with like-minded people and exploring ways to make an impact in Data
-          Science and AI.
-        </p>
+        <div className="glass-card rounded-3xl p-8 sm:p-10">
+          <p className="max-w-3xl text-base sm:text-lg font-light leading-relaxed text-[#1A1A1A]/85">
+            CSE undergrad at BML Munjal University, passionate about Technology, Innovation and
+            Entrepreneurship. I work where ML and DL meet the real world — turning data into
+            decisions that matter. New ideas captivate me and I build on them. Always open to
+            connecting with like-minded people and exploring ways to make an impact in Data
+            Science and AI.
+          </p>
+        </div>
       </Reveal>
 
-      <div className="mt-20">
-        <Reveal>
+      <Reveal>
+        <div className="glass-card rounded-3xl p-8 sm:p-10">
           <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold">Skills</h3>
-        </Reveal>
-        <div className="mt-8 space-y-8">
-          {Object.entries(skills).map(([group, { items, quip }]) => (
-            <Reveal key={group}>
-              <div data-companion={quip || undefined}>
+          <div className="mt-8 space-y-8">
+            {Object.entries(skills).map(([group, { items, quip }]) => (
+              <div key={group} data-companion={quip || undefined}>
                 <div className="text-xs uppercase tracking-widest text-[#666666]/80 font-light">
                   {group}
                 </div>
@@ -75,54 +75,43 @@ export default function About() {
                   {items.map((s) => (
                     <motion.span
                       key={s}
-                      variants={{
-                        hidden: { opacity: 0, y: 12 },
-                        show: { opacity: 1, y: 0 },
-                      }}
-                      className="border border-[#D97706]/60 rounded-full px-4 py-1.5 text-sm font-light text-[#1A1A1A]"
+                      variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
+                      className="glass-card rounded-full px-4 py-1.5 text-sm font-light text-[#1A1A1A]"
                     >
                       {s}
                     </motion.span>
                   ))}
                 </motion.div>
               </div>
-            </Reveal>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </Reveal>
 
-      <div className="mt-20">
-        <Reveal>
-          <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold">
-            Education
-          </h3>
-        </Reveal>
-        <ul className="mt-8 divide-y divide-[#1A1A1A]/10">
-          {education.map((e, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <li className="py-5">
+      <Reveal>
+        <div className="glass-card rounded-3xl p-8 sm:p-10">
+          <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold">Education</h3>
+          <ul className="mt-6 divide-y divide-white/40">
+            {education.map((e, i) => (
+              <li key={i} className="py-5">
                 <div className="font-medium">{e.title}</div>
                 <div className="text-sm font-light text-[#666666] mt-1">{e.sub}</div>
               </li>
-            </Reveal>
-          ))}
-        </ul>
-      </div>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
 
-      <div className="mt-20">
-        <Reveal>
-          <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold">
-            Achievements
-          </h3>
-        </Reveal>
-        <ul className="mt-8 space-y-4">
-          {achievements.map((a, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <li className="font-light leading-relaxed">— {a}</li>
-            </Reveal>
-          ))}
-        </ul>
-      </div>
+      <Reveal>
+        <div className="glass-card rounded-3xl p-8 sm:p-10">
+          <h3 className="text-sm uppercase tracking-widest text-[#1A1A1A] font-semibold">Achievements</h3>
+          <ul className="mt-6 space-y-4">
+            {achievements.map((a, i) => (
+              <li key={i} className="font-light leading-relaxed">— {a}</li>
+            ))}
+          </ul>
+        </div>
+      </Reveal>
     </section>
   );
 }
