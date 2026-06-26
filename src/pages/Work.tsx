@@ -110,7 +110,7 @@ const projects = [
 
 function Card({ children, companion }: { children: React.ReactNode; companion?: string }) {
   return (
-    <div data-companion={companion} className="border border-[#D97706]/25 p-6 sm:p-8 bg-white transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(217,119,6,0.25)]">
+    <div data-companion={companion} className="border border-[#1A1A1A]/15 p-6 sm:p-8 bg-white transition-all duration-[250ms] ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.15)]">
       {children}
     </div>
   );

@@ -98,7 +98,7 @@ export default function About() {
             Education
           </h3>
         </Reveal>
-        <ul className="mt-8 divide-y divide-[#D97706]/15">
+        <ul className="mt-8 divide-y divide-[#1A1A1A]/10">
           {education.map((e, i) => (
             <Reveal key={i} delay={i * 0.05}>
               <li className="py-5">

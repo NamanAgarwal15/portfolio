@@ -65,7 +65,7 @@ export default function Contact() {
 
 
   const inputClass =
-    "w-full bg-transparent border-b border-[#D97706]/30 py-3 text-base font-light text-[#1A1A1A] placeholder:text-[#666666]/60 focus:outline-none focus:border-[#1A1A1A] transition-colors";
+    "w-full bg-transparent border-b border-[#1A1A1A]/20 py-3 text-base font-light text-[#1A1A1A] placeholder:text-[#888888] focus:outline-none focus:border-[#1A1A1A] transition-colors";
 
   return (
     <section className="max-w-3xl mx-auto px-6 py-20">
@@ -193,7 +193,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 + i * 0.08, duration: 0.45, ease: "easeOut" }}
-            className="border-b border-[#D97706]/15"
+            className="border-b border-[#1A1A1A]/10"
           >
             <a
               href={r.href}

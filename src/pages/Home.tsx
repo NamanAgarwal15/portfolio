@@ -83,7 +83,7 @@ export default function Home() {
         transition={{ delay: name.length * 0.03 + 0.7, duration: 0.5 }}
         className="mt-20 mb-24"
       >
-        <div className="h-px bg-[#D97706]/20 w-full" />
+        <div className="h-px bg-[#1A1A1A]/15 w-full" />
         <div className="mt-10 grid grid-cols-3 gap-6">
           {STATS.map((s) => (
             <div key={s.label} data-companion={s.quip}>
