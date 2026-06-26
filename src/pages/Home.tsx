@@ -7,8 +7,8 @@ const name = "Naman Agarwal";
 
 const STATS = [
   { value: 7.93, decimals: 2, label: "CGPA", quip: "7.93 out of 10. The 0.07 was sacrificed to shipping actual projects." },
-  { value: 4, decimals: 0, label: "Internships", quip: "4 internships before final year. Data science, IoT, marketing, web dev — he couldn't pick one so he did all of them." },
-  { value: 4, decimals: 0, label: "Projects", quip: "4 projects. All of them actually work. Most of the time." },
+  { value: 4, decimals: 0, label: "Internships", to: "/work", quip: "4 internships before final year. Data science, IoT, marketing, web dev — he couldn't pick one so he did all of them." },
+  { value: 4, decimals: 0, label: "Projects", to: "/work", quip: "4 projects. All of them actually work. Most of the time." },
 ];
 
 export default function Home() {
