@@ -31,8 +31,9 @@ const education = [
 ];
 
 const achievements = [
-  "First Runner-Up, TechSparx.I Showcase (BMU) — 80+ teams",
-  "Co-Chair, Innovation Vertical, Young Indians BMU",
+  "Second Place, TechSparx.I Showcase (BMU) — 80+ teams — Smart Wildfire-Fighting Robot",
+  "First Runner-Up, TechSparx.I Showcase (BMU) — 80+ teams — DriveSafe-IND",
+  "Co-Chair, Innovation Vertical, Young Indians BMU — Aug 2024 to Aug 2025",
   "Foundations of Project Management — Google, Coursera, May 2026",
 ];
 
@@ -46,9 +47,11 @@ export default function About() {
 
       <Reveal delay={0.05}>
         <p className="mt-8 max-w-3xl text-base sm:text-lg font-light leading-relaxed text-[#1A1A1A]/85">
-          I'm a third-year CSE undergrad at BML Munjal University specialising in Data Science
-          and AI. I work at the intersection of machine learning, computer vision, and product
-          thinking — building systems that are deployable, not just experimental.
+          CSE undergrad at BML Munjal University, passionate about Technology, Innovation and
+          Entrepreneurship. I work where ML and DL meet the real world — turning data into
+          decisions that matter. New ideas captivate me and I build on them. Always open to
+          connecting with like-minded people and exploring ways to make an impact in Data
+          Science and AI.
         </p>
       </Reveal>
 

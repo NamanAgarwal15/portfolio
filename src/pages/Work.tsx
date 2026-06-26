@@ -9,8 +9,9 @@ const experience = [
     where: "Delhi",
     quip: "Tracked 10 lakh+ campaigns in real time. Yes, lakh. He thinks in Indian number formats now.",
     bullets: [
-      "Developed an automated marketing analytics dashboard using Python and Quadratic Sheets to track 10L+ campaigns in real time.",
-      "Performed EDA to analyze customer journeys linking marketing efforts to sales outcomes, enabling funnel visibility and identifying high-performing segments and ROAS trends.",
+      "Built a dashboard workflow integrating Google Ads and Meta Ads APIs into Quadratic to auto-update standardized sheets and performance dashboards using Python, processing data from 10L+ digital marketing campaigns in real time.",
+      "Performed EDA to analyze customer journeys linking marketing efforts to sales outcomes, enabling full-funnel visibility and identifying high-performing segments and ROAS trends.",
+      "Led communication with CxOs through interim and monthly performance reviews, aligning on KPIs.",
     ],
   },
   {
@@ -23,6 +24,18 @@ const experience = [
       "Optimized DL models for embedded IoT systems using quantization, retaining over 80% accuracy.",
       "Evaluated TinyML deployment options with low-power MCUs like Raspberry Pi.",
       "Implemented sensor fusion pipelines combining Ultrasonic and camera data via lightweight CNNs (YOLO), improving detection accuracy by 7%.",
+    ],
+  },
+  {
+    role: "Co-Chair, Innovation Vertical",
+    org: "Young Indians (Yi)",
+    when: "Aug 2024 – Aug 2025",
+    where: "Gurugram",
+    quip: "Led a full year of innovation events at BMU. Yes, he voluntarily ran more meetings than required. Character flaw or feature? Unclear.",
+    bullets: [
+      "Co-Chair of the Innovation vertical at the Young Indians chapter at BMU, leading initiatives to empower youth toward innovative thinking and industry exposure.",
+      "Coordinated events, workshops, and collaborations exploring new technologies and business ideas.",
+      "Led Sangam 1.0 in collaboration with the Entrepreneurship vertical, serving as both Co-Chair of Innovation and Operations Lead.",
     ],
   },
   {
@@ -76,6 +89,20 @@ const projects = [
       "Trained multiple ML models to predict IPL match outcomes with 65%+ accuracy using structured IPL data.",
       "Scraped 1,000+ match records from ESPNcricinfo and Cricbuzz using custom web scraping scripts.",
       "Engineered 30+ predictive features: team strength, venue bias, recent form, head-to-head stats.",
+    ],
+    link: "#placeholder",
+  },
+  {
+    name: "Smart Wildfire-Fighting Robot with RAS",
+    subtitle: "",
+    when: "Aug 2023 – Present",
+    tags: ["Arduino", "GSM", "Geolocation", "IoT", "Sensors"],
+    quip: "A robot that fights wildfires. Built with Arduino and a concerning amount of late nights. Second place at TechSparx out of 80+ teams — the robot deserved first.",
+    bullets: [
+      "Developed a wildfire-fighting robot with advanced sensors, geolocation, and GSM modules for precise tracking and remote communication in wildfire-prone areas.",
+      "Integrated a Remote Alerting System (RAS) enabling real-time monitoring and remote activation for rapid response to emerging fire threats.",
+      "Controlled via Arduino for autonomous operation in challenging environments; designed for cost-effective, scalable early wildfire detection.",
+      "Second place out of 80+ teams at TechSparx.I 2025, BMU.",
     ],
     link: "#placeholder",
   },
