@@ -18,7 +18,7 @@ export default function Home() {
       <div style={{ fontFamily: "'Courier New', Courier, monospace", fontSize: "13px", color: "#D97706", opacity: 0.8 }} className="mb-4">
         // cs undergrad · data science & ai · builder
       </div>
-      <h1 className="font-light tracking-tight leading-[1.05]" style={{ fontSize: "clamp(2.5rem, 8vw, 5rem)" }}>
+      <h1 className="text-[clamp(2.5rem,8vw,5rem)] sm:text-7xl md:text-8xl font-light tracking-tight leading-[1.05] break-words">
         {name.split("").map((c, i) => (
           <motion.span
             key={i}
