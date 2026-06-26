@@ -1,5 +1,14 @@
+import { useState } from "react";
 import { Reveal } from "@/components/Section";
 import SEO from "@/components/SEO";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 const experience = [
   {
