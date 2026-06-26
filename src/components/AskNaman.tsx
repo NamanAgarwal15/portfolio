@@ -44,7 +44,7 @@ function loadSaved(): { sid: string; messages: Msg[] } {
 function suggestionsFor(lastAssistant: string, lastUser: string): string[] {
   const text = `${lastUser} ${lastAssistant}`;
   for (const f of FOLLOWUPS) if (f.match.test(text)) return f.suggest;
-  return ["What are his strongest skills?", "How can I contact him?"];
+  return DEFAULT_FOLLOWUPS;
 }
 
 export default function AskNaman() {
