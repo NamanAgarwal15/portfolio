@@ -93,11 +93,11 @@ export default function Home() {
         className="mt-20 mb-24"
       >
         <div className="h-px bg-[#1A1A1A]/15 w-full" />
-        <div className="mt-10 grid grid-cols-3 gap-6">
+        <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-6">
           {STATS.map((s) => {
             const inner = (
               <>
-                <div className="text-3xl sm:text-5xl font-light tracking-tight text-[#1A1A1A]">
+                <div className="text-2xl sm:text-5xl font-light tracking-tight text-[#1A1A1A]">
                   <Counter to={s.value} decimals={s.decimals} />
                 </div>
                 <div className="mt-2 text-xs uppercase tracking-widest text-[#888888] font-light">
