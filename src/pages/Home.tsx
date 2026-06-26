@@ -87,7 +87,7 @@ export default function Home() {
         <div className="mt-10 grid grid-cols-3 gap-6">
           {STATS.map((s) => (
             <div key={s.label} data-companion={s.quip}>
-              <div className="text-3xl sm:text-5xl font-light tracking-tight">
+              <div className="text-3xl sm:text-5xl font-light tracking-tight text-[#1A1A1A]">
                 <Counter to={s.value} decimals={s.decimals} />
               </div>
               <div className="mt-2 text-xs uppercase tracking-widest text-[#888888] font-light">
